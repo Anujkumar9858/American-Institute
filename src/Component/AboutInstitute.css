@@ -1,0 +1,116 @@
+/* AboutInstitute.css - tightened so it never overflows the screen */
+
+/* reset box sizing for safety */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* variables */
+:root {
+  --blue-1: #697bff;
+  --blue-2: #7ea1ff;
+  --white: #ffffff;
+  --text-muted: rgba(255,255,255,0.95);
+}
+
+/* wrapper */
+.about-institute-section {
+  background: transparent;
+  padding: 20px 0 40px;
+}
+
+/* main rounded panel - constrain width and center */
+.about-card {
+  max-width: 1150px;       /* prevent full-bleed on very large screens */
+  margin: 0 auto;
+  background: linear-gradient(90deg, var(--blue-1) 0%, var(--blue-2) 100%);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(20,30,80,0.06);
+}
+
+/* left block (blue area with text) */
+.about-left {
+  color: var(--white);
+  min-height: 180px;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* heading - reduced and responsive */
+.about-head {
+  font-size: 40px;    /* reduced from very large */
+  font-weight: 800;
+  margin: 4px 0 12px;
+  letter-spacing: -0.4px;
+  line-height: 1;
+}
+
+/* paragraphs */
+.about-copy p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 8px;
+  max-width: 640px;
+}
+
+/* smaller supporting text */
+.about-sub {
+  color: rgba(255,255,255,0.9);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+/* right block: image */
+.about-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* image container */
+.about-image-wrap {
+  width: 100%;
+  max-width: 320px;
+  height: 180px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+  background: #fff;
+}
+
+/* img itself */
+.about-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Smaller devices: stack vertically and reduce sizes */
+@media (max-width: 991px) {
+  .about-card { max-width: 92%; }
+  .about-head { font-size: 34px; }
+  .about-image-wrap { max-width: 280px; height: 160px; }
+}
+
+@media (max-width: 767px) {
+  .about-card { border-radius: 12px; }
+  .about-left, .about-right { border-radius: 0; padding: 18px; }
+  .about-left { order: 1; }
+  .about-right { order: 2; margin-top: 12px; }
+  .about-head { font-size: 28px; text-align: left; }
+  .about-image-wrap { width: 90%; height: 200px; margin: 0 auto; }
+  .about-copy p { font-size: 14px; }
+}
+
+/* tiny polish */
+.about-card img { display: block; }

@@ -1,0 +1,150 @@
+/* Visit Us Section */
+.visit-section {
+  padding: 60px 0;
+  background: #fff;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.visit-header {
+  margin-bottom: 24px;
+}
+
+.visit-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: #111827;
+  margin: 0;
+}
+
+.visit-sub {
+  font-size: 14px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* Map Wrapper */
+.map-wrapper {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(17, 24, 39, 0.08);
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Image */
+.map-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: grayscale(100%);
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 400ms cubic-bezier(.2,.9,.3,1), filter 300ms ease;
+}
+
+.map-wrapper:hover .map-img {
+  transform: scale(1.02);
+  filter: grayscale(40%);
+}
+
+/* Marker Style */
+.map-marker {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 999px;
+  padding: 10px;
+  box-shadow: 0 10px 26px rgba(2, 6, 23, 0.12);
+  cursor: pointer;
+  transform-origin: center;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms;
+  z-index: 5;
+  outline: none;
+}
+
+.map-marker svg {
+  color: #ff3b30;
+  width: 26px;
+  height: 26px;
+}
+
+.map-marker:hover,
+.map-marker:focus {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 18px 36px rgba(2, 6, 23, 0.15);
+  background: #fff;
+}
+
+.map-marker::after {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 999px;
+}
+
+/* Example positions (adjust according to map image) */
+.marker-1 {
+  top: 20%;
+  left: 30%;
+}
+.marker-3 {
+  top: 35%;
+  left: 75%;
+}
+
+/* Bounce Animation */
+@keyframes bounce {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(-8px); }
+  70%  { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+.map-marker {
+  animation: bounce 1900ms infinite ease-in-out;
+  animation-delay: 400ms;
+}
+
+/* Responsive tweaks */
+@media (max-width: 992px) {
+  .visit-section { padding: 40px 14px; }
+  .visit-title { font-size: 28px; }
+  .visit-sub { font-size: 13px; }
+  .map-marker svg { width: 22px; height: 22px; }
+  .map-marker { padding: 9px; }
+  .map-marker::after { inset: -10px; }
+}
+
+@media (max-width: 576px) {
+  .visit-section { padding: 28px 12px; }
+  .visit-title { font-size: 22px; }
+  .visit-sub { font-size: 13px; }
+
+  /* Map image fix for phones */
+  .map-img {
+    object-fit: contain;   /* prevent stretching */
+    max-height: 280px;     /* limit height */
+  }
+
+  .map-wrapper {
+    max-height: 300px;     /* wrapper control */
+  }
+
+  .map-marker {
+    padding: 10px;
+  }
+  .map-marker svg {
+    width: 24px;
+    height: 24px;
+  }
+  .map-marker::after { inset: -12px; }
+}
+
+/* Focus ring for accessibility */
+.map-marker:focus {
+  box-shadow: 0 0 0 6px rgba(109,77,223,0.12);
+}

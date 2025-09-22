@@ -1,0 +1,146 @@
+/* FooterBottom.css (replace your old file with this) */
+
+.custom-footer {
+  background: #000;
+  color: #fff;
+  padding: 60px 0;
+}
+
+/* Make the footer area a little taller on desktop for nicer vertical centering */
+@media (min-width: 992px) {
+  .custom-footer .container,
+  .custom-footer .container-fluid {
+    height: 220px; /* tweak if you want more/less spacing */
+  }
+}
+
+/* Column wrappers: use flex for vertical centering on desktop */
+.footer-left,
+.footer-center,
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical center inside column */
+  height: 100%;
+}
+
+/* Desktop alignment: left / center / right */
+@media (min-width: 992px) {
+  .footer-left {
+    align-items: flex-start; /* heading left */
+    padding-left: 12px;
+  }
+
+  .footer-center {
+    align-items: center; /* center column horizontally centered in its grid cell */
+  }
+
+  .footer-center .footer-info {
+    text-align: left;      /* but content inside stays left-aligned like in the image */
+    max-width: 320px;      /* restrict width so lines break nicely */
+    width: 100%;
+  }
+
+  .footer-right {
+    align-items: flex-end; /* social icons on the right */
+    padding-right: 18px;
+  }
+}
+
+/* Title styling */
+.footer-title {
+  font-size: 40px; /* larger on desktop to match image */
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 0;
+  color: #fff;
+}
+
+/* Make title smaller on mobile */
+@media (max-width: 991px) {
+  .footer-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+}
+
+/* Info & headings */
+.footer-info h5,
+.footer-social h5 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+  margin-right: 227px;
+}
+
+.footer-info p {
+  font-size: 14px;
+  margin-bottom: 12px;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+/* Social icons block */
+.footer-social {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-social .social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  margin-right: 200px;
+}
+
+.footer-social .social-icons a {
+  color: #fff;
+  font-size: 18px;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: transparent;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+  box-shadow: none;
+}
+
+.footer-social .social-icons a:hover {
+  color: white;
+  transform: translateY(-4px);
+  background: rgba(109, 77, 223, 0.12); /* subtle theme accent */
+}
+
+/* Make sure right-column items truly right on desktop */
+@media (min-width: 992px) {
+  .footer-right .footer-social {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  .footer-right .social-icons {
+    justify-content: flex-end;
+  }
+}
+
+/* Responsive: stack nicely for small screens */
+@media (max-width: 991px) {
+  .footer-left,
+  .footer-center,
+  .footer-right {
+    align-items: flex-start;
+    padding: 0 12px;
+  }
+  .footer-center .footer-info {
+    max-width: 100%;
+  }
+  .footer-right .footer-social {
+    align-items: flex-start;
+    margin-top: 12px;
+  }
+}

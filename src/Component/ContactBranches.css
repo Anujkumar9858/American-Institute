@@ -1,0 +1,140 @@
+.contact-branches {
+  padding: 50px 0;
+  background: #fff;
+  text-align: center;
+}
+
+.contact-title {
+  font-size: 32px;
+  font-weight: 800;
+}
+.contact-sub {
+  color: #666;
+  margin-bottom: 28px;
+}
+
+/* LEFT */
+.contact-left { display: flex; justify-content: center; }
+.contact-card {
+  background: #0f1720;
+  color: #fff;
+  padding: 26px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 360px;
+  text-align: left;
+}
+.contact-card h3 { font-size: 18px; margin-bottom: 18px; }
+
+.contact-fields label {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #ccc;
+}
+.field {
+  background: #fff;
+  color: #000;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.connect p { margin-top: 12px; font-size: 14px; color: #bbb; }
+.socials { display: flex; gap: 12px; margin: 8px 0 16px; }
+.socials a { color: #fff; font-size: 18px; transition: 0.3s; }
+.socials a:hover { color: #6d4ddf; }
+
+.visit-btn {
+  background: linear-gradient(90deg, #6d4ddf, #7ea1ff);
+  color: #fff;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+/* RIGHT MAP */
+.map-wrapper {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  height: 420px;
+}
+.map-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%) contrast(1.1);
+}
+
+/* Pins with pulse animation */
+.map-pin {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  cursor: pointer;
+}
+.pin-dot {
+  width: 20px;
+  height: 20px;
+  background: #ff3b30;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  z-index: 2;
+}
+.pin-pulse {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 59, 48, 0.4);
+  transform: translate(-50%, -50%);
+  animation: pulse 1.5s infinite;
+}
+
+/* Existing code remains same */
+
+/* --- BIG BACKGROUND TEXT --- */
+.big-text-wrap {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  line-height: 0.9;
+}
+
+.big-text {
+  font-size: clamp(40px, 12vw, 160px);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #dfdbdb;
+  margin: 0;
+  letter-spacing: 6px;
+  user-select: none;
+  pointer-events: none;
+  animation: fadeInUp 0.8s ease both;
+}
+
+.big-text:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% { transform: translate(-50%, -50%) scale(0.6); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(1.4); opacity: 0; }
+}

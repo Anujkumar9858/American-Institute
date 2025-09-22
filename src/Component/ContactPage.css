@@ -1,0 +1,155 @@
+/* ContactPage.css - updated title sizes and bold subtitle + info-box styling */
+
+.contact-page {
+  background: #fff;
+  min-height: 100vh;
+  padding-top: 110px; /* space for fixed navbar */
+}
+
+/* Banner */
+.contact-banner {
+  background: #6d4ddf;
+  color: #fff;
+  padding: 50px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+.contact-banner h1 {
+  font-size: clamp(60px, 10vw, 120px);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -2px;
+  margin: 0;
+}
+
+/* Content container */
+.contact-content {
+  max-width: 1150px;
+  margin: 0 auto 60px;
+}
+
+/* Form title (bigger) */
+.form-title {
+  font-size: clamp(30px, 3.2vw, 36px); /* larger, responsive */
+  font-weight: 900;
+  margin: 6px 0 8px;
+  color: #0b1220;
+  line-height: 1.05;
+}
+
+/* Subtitle bold + dark */
+.form-sub {
+  font-size: 16px;
+  font-weight: 700;
+  color: #374151; /* dark gray */
+  margin-bottom: 18px;
+}
+
+/* Field labels bold + dark */
+.field-label {
+  font-weight: 700;
+  color: #111;
+}
+
+/* Form controls */
+.form-control {
+  border-radius: 8px;
+  border: 1px solid rgba(16, 24, 40, 0.08);
+  padding: 12px 14px;
+  box-shadow: none;
+}
+
+/* Send button */
+.send-btn {
+  background: linear-gradient(90deg, #6d4ddf, #7ea1ff);
+  border: none;
+  padding: 12px 28px;
+  border-radius: 999px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 12px 36px rgba(109, 77, 223, 0.12);
+}
+
+/* Right Info Card */
+.info-card {
+  background: #0f1720;
+  color: #fff;
+  border-radius: 16px;
+  padding: 26px;
+  margin-top: 12px;
+  box-shadow: 0 20px 50px rgba(5, 10, 20, 0.2);
+}
+.info-title {
+  font-size: 16px;
+  margin-bottom: 18px;
+  font-weight: 700;
+}
+
+/* Info boxes: white background, black text (photo-like) */
+.info-box {
+  background: #fff;
+  color: #000;
+  border-radius: 10px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+}
+.info-label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+}
+.info-value {
+  font-size: 14px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Social icons area */
+.connect {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.socials {
+  display: flex;
+  gap: 12px;
+}
+.socials a {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  transition: all 0.25s ease;
+}
+.socials a:hover {
+  background: #6d4ddf;
+  transform: translateY(-4px);
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .contact-banner h1 { font-size: clamp(48px, 10vw, 90px); }
+  .info-card { margin-top: 22px; }
+}
+@media (max-width: 575px) {
+  .contact-content { padding-left: 12px; padding-right: 12px; }
+  .contact-page { padding-top: 88px; }
+  .contact-banner h1 { font-size: clamp(36px, 14vw, 72px); }
+  .send-btn { width: 100%; }
+  .info-card { padding: 18px; }
+  .socials { justify-content: center; }
+}

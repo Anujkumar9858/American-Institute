@@ -1,0 +1,188 @@
+/* StudentTestimonials.css
+   Full styles for StudentTestimonials component (desktop buttons outside, mobile swipe-only)
+*/
+
+/* Container */
+.student-testimonials {
+  padding: 70px 0;
+  background: #fff;
+  position: relative;
+  overflow: visible;
+}
+
+/* LEFT PANEL */
+.left-panel {
+  padding: 12px;
+}
+.section-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 18px;
+  line-height: 1.05;
+}
+.section-desc {
+  color: #555;
+  margin-bottom: 26px;
+  max-width: 420px;
+}
+.experience-btn {
+  background: linear-gradient(90deg, #6d4ddf, #7ea1ff);
+  color: #fff;
+  border: none;
+  padding: 14px 22px;
+  border-radius: 999px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(109, 77, 223, 0.3);
+  cursor: pointer;
+}
+
+/* RIGHT PANEL / DEVICE FRAME */
+.right-panel { padding: 12px; }
+.device-frame {
+  background: #1a1a1a;
+  border-radius: 14px;
+  padding: 18px;
+  overflow: hidden;
+  position: relative;
+}
+.frame-top-bar {
+  height: 12px;
+  background: #333;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* SLIDER WRAPPER */
+.testimonial-slider {
+  overflow: visible;
+  position: relative;
+  padding: 6px 0;
+}
+
+/* CONTROLS (Prev / Next)
+   Controls are positioned outside the frame on larger screens.
+   They are rendered only on non-phone devices by the component (JS).
+*/
+.slider-control {
+  position: absolute;
+  z-index: 120; /* ensure clickable above other elements */
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .15s ease, transform .12s ease;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+.slider-control:hover { background: rgba(255,255,255,0.12); transform: translateY(-50%) scale(1.03); }
+
+/* Position controls outside the device-frame to avoid overlapping cards */
+.slider-control.prev { left: -60px; }
+.slider-control.next { right: -60px; }
+
+/* Expand clickable area without changing visible size */
+.slider-control::after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* VIEWPORT & TRACK */
+.slider-viewport {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  z-index: 1; /* track sits below controls */
+}
+.slider-track {
+  display: flex;
+  align-items: stretch;
+  transition: transform 0.45s cubic-bezier(.2,.9,.3,1);
+  will-change: transform;
+}
+
+/* CARD */
+.testimonial-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 10px;
+  min-width: 260px;
+  max-width: 260px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(12, 18, 30, 0.08);
+  flex: 0 0 auto;
+}
+.student-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+.feedback {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 12px;
+}
+.testimonial-card h5 {
+  margin: 0;
+  font-weight: 700;
+}
+.testimonial-card span {
+  font-size: 13px;
+  color: #777;
+}
+
+/* RESPONSIVE ADJUSTMENTS */
+@media (max-width: 1200px) {
+  .slider-control.prev { left: -46px; }
+  .slider-control.next { right: -46px; }
+  .slider-control { width: 44px; height: 44px; }
+  .testimonial-card { min-width: 240px; max-width: 240px; margin: 0 9px; }
+  .section-desc { max-width: 360px; }
+}
+
+@media (max-width: 991px) {
+  .section-title { font-size: 28px; }
+  .slider-control { width: 40px; height: 40px; }
+  .testimonial-card { min-width: 230px; max-width: 230px; margin: 0 8px; padding: 16px; }
+  .student-img { width: 64px; height: 64px; }
+  .slider-control.prev { left: -42px; }
+  .slider-control.next { right: -42px; }
+}
+
+/* MOBILE: hide external controls visually if they exist (component doesn't render them on phone),
+   and place them inside if somehow present. Main navigation is via swipe on phone.
+*/
+@media (max-width: 599px) {
+  .left-panel { text-align: center; margin-bottom: 18px; }
+  .device-frame { padding: 12px; }
+  .testimonial-card { min-width: 220px; max-width: 220px; }
+  .slider-control.prev { left: 6px; }
+  .slider-control.next { right: 6px; }
+  .slider-control { background: rgba(255,255,255,0.08); }
+}
+
+/* Minor visual polish */
+.testimonial-card h5 { color: #0f1724; font-size: 16px; margin-top: 6px; }
+.testimonial-card .feedback { line-height: 1.4; }
+
+/* Accessibility: focus styles for controls */
+.slider-control:focus {
+  outline: 3px solid rgba(125, 100, 255, 0.18);
+  outline-offset: 4px;
+}

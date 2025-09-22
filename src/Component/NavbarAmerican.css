@@ -1,0 +1,300 @@
+/* NavbarAmerican.css — updated */
+
+/* Ensure no unexpected horizontal overflow from elements */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* safety: prevents page-level horizontal scroll */
+}
+
+/* Base navbar */
+.animated-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 1100;
+  transition: all 240ms cubic-bezier(.2,.9,.3,1);
+  transform-origin: top center;
+  background: #fff;
+  padding: 16px 0;
+  box-shadow: none;
+  box-sizing: border-box;
+}
+
+/* Container */
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 12px;
+  padding-right: 12px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* TOP state */
+.animated-navbar.top {
+  background: #fff;
+  padding: 14px 0;
+  box-shadow: none;
+}
+
+/* SCROLLED state */
+.animated-navbar.scrolled {
+  margin: 0;
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  width: auto;
+  border-radius: 12px;
+  padding: 6px 8px;
+  box-shadow: 0 8px 26px rgba(12,18,30,0.08);
+  animation: navbar-pop 320ms ease;
+}
+
+/* Brand (left) */
+.brand-wrap { display: flex; align-items: center; flex: 0 0 auto; }
+.brand-text {
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: 0.4px;
+  transition: font-size 200ms ease, transform 200ms ease, color 200ms ease;
+  color: #111;
+}
+.animated-navbar.scrolled .brand-text {
+  font-size: 16px;
+  transform: translateY(-2px);
+  color: #111;
+}
+
+/* Nav area */
+.navbar-collapse {
+  flex-basis: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* nav-links wrapper */
+/* increased gap for desktop but also allow per-item margins for more control */
+.nav-links {
+  display: flex;
+  gap: 32px; /* base gap between groups of links */
+  align-items: center;
+}
+
+/* Individual links */
+/* remove underline, ensure consistent spacing and use Bootstrap-friendly display */
+.nav-links .nav-link-item,
+.nav-links .nav-link-item:link,
+.nav-links .nav-link-item:visited {
+  font-weight: 700;
+  font-size: 17px;
+  transition: background 180ms ease, transform 140ms ease, color 180ms ease;
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin: 0;               /* gaps handled by .nav-links gap + per-item margin below */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;   /* <-- remove underline for anchors */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* some browsers add underline on focus/active - explicitly prevent it */
+.nav-links .nav-link-item:hover,
+.nav-links .nav-link-item:focus,
+.nav-links .nav-link-item:active {
+  text-decoration: none;   /* keep underline removed */
+  outline: none;
+}
+
+/* Add horizontal spacing between each visible link for extra clarity */
+.nav-links .nav-link-item + .nav-link-item {
+  margin-left: 12px; /* additional gap between adjacent items */
+}
+
+/* Hover look */
+.nav-links .nav-link-item:hover {
+  color: #6d4ddf;
+  background: rgba(109,77,223,0.06);
+  transform: translateY(-2px);
+}
+
+/* Scrolled nav link smaller */
+.animated-navbar.scrolled .nav-links .nav-link-item {
+  font-size: 15px;
+  padding: 6px 10px;
+  color: #222;
+}
+
+/* User icon */
+.user-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  transition: transform 0.28s ease, color 0.28s ease;
+}
+
+/* Navbar toggle */
+.nav-toggle {
+  border: none;
+  color: #111;
+  padding: 6px 8px;
+}
+
+/* Collapse menu base */
+.navbar-collapse {
+  flex-basis: 100%;
+  justify-content: flex-end;
+}
+
+/* ========== Desktop styles (>=992px) ========== */
+@media (min-width: 992px) {
+  .nav-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 0;
+  }
+
+  .brand-wrap {
+    grid-column: 1 / 2;
+    justify-self: start;
+    padding-left: 6px;
+  }
+
+  .navbar-collapse {
+    grid-column: 2 / 3;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    width: auto;
+    padding: 0;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 54px; /* desktop me aur jyada gap between groups */
+  }
+
+  .nav-links .nav-link-item {
+    display: inline-flex;
+    width: auto;
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 18px; /* bada font desktop pe */
+  }
+
+  /* extra spacing between the main textual links (Home/Courses/Gallery/Contact) */
+  .nav-links .nav-link-item:not(.user-link) {
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .user-link { margin-left: 6px; }
+  .nav-toggle { display: none !important; }
+}
+
+/* ========== Mobile styles (<992px) ========== */
+@media (max-width: 991px) {
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .brand-wrap { flex: 0 0 auto; }
+  .nav-toggle { display: inline-flex; }
+
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: #fff;
+    padding: 8px 10px;
+    box-shadow: 0 8px 30px rgba(12,18,30,0.06);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    box-sizing: border-box;
+    display: block;
+  }
+
+  .nav-links { display: block; }
+  .nav-links .nav-link-item {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    margin: 6px 0;
+    text-align: left;
+    font-size: 16px; /* mobile pe bhi readable */
+  }
+
+  .animated-navbar.scrolled {
+    left: 6px;
+    right: 6px;
+    top: 6px;
+    border-radius: 10px;
+  }
+
+  .animated-navbar * {
+    box-sizing: border-box;
+    max-width: 100%;
+  }
+
+  .brand-text { font-size: 20px; }
+  .nav-toggle { padding: 8px; font-size: 20px; }
+}
+
+/* Extra small phones */
+@media (max-width: 576px) {
+  .brand-text { font-size: 18px; }
+  .animated-navbar.top { padding: 10px 0; }
+  .animated-navbar.scrolled { padding: 6px 0; }
+
+  .nav-links .nav-link-item {
+    font-size: 15px;
+    padding: 10px 14px;
+    text-align: center;
+  }
+  .navbar-collapse { padding: 8px 10px; }
+  .nav-toggle { padding: 6px; }
+}
+
+/* Pop animation */
+@keyframes navbar-pop {
+  0% { opacity: 0; transform: translateY(-6px) scale(0.98); }
+  60% { opacity: 1; transform: translateY(0) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* ===== Brand logo size fixes ===== */
+.brand-logo {
+  display: block;
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  vertical-align: middle;
+  transition: height 180ms ease;
+}
+
+.animated-navbar.scrolled .brand-logo {
+  height: 30px;
+}
+
+@media (max-width: 991px) {
+  .brand-logo { height: 34px; }
+  .animated-navbar.scrolled .brand-logo { height: 28px; }
+}
+
+@media (max-width: 576px) {
+  .brand-logo { height: 30px; }
+  .animated-navbar.scrolled .brand-logo { height: 26px; }
+}

@@ -1,0 +1,121 @@
+/* AwardsStrip.css - constrained & responsive so it fits screens */
+
+/* top-level spacing */
+.awards-strip {
+  padding: 18px 0 28px;
+  background: transparent;
+}
+
+/* ensure container centered */
+.awards-strip > .container {
+  max-width: 1150px;
+  padding-left: 12px;
+  padding-right: 12px;
+  margin: 0 auto;
+}
+
+/* header */
+.strip-header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.strip-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+}
+
+/* nav buttons */
+.nav-buttons { display:flex; gap:8px; }
+.nav-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: none;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(12,20,40,0.06);
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+
+/* grid layout: responsive columns but constrained width so cards fit */
+.strip-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 columns */
+  gap: 18px;
+  padding: 8px 0;
+  align-items: stretch;
+}
+
+/* card */
+.strip-card {
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.strip-card:focus { box-shadow: 0 0 0 6px rgba(109,77,223,0.06); outline: none; }
+
+/* inner */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: #f6f6f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* placeholder / image sizing */
+.card-placeholder,
+.card-img {
+  width: 92%;
+  height: 86%;
+  border-radius: 10px;
+  background: #dedede;
+  object-fit: cover;
+}
+
+/* active highlight */
+.strip-card.active .card-inner {
+  border: 4px solid #1e90ff;
+  box-shadow: 0 10px 26px rgba(30,144,255,0.18);
+  transform: translateY(-4px);
+}
+
+/* dots */
+.strip-dots { display:flex; justify-content:center; gap:10px; margin-top: 12px; }
+.dot { width: 8px; height: 8px; border-radius: 999px; background: #e0e0e0; border: none; cursor: pointer; }
+.dot.active { width: 34px; background: #cfcfe6; box-shadow: 0 8px 18px rgba(109,77,223,0.12); }
+
+/* responsive: fewer columns and maintain spacing */
+@media (max-width: 991px) {
+  .strip-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+}
+@media (max-width: 768px) {
+  .strip-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .nav-btn { width: 34px; height: 34px; }
+}
+@media (max-width: 480px) {
+  .strip-row { grid-template-columns: 1fr; gap: 12px; }
+  .dot.active { width: 24px; }
+  .nav-buttons { justify-content: center; margin-top: 8px; }
+}
+
+/* ensure no horizontal overflow */
+.awards-strip, .strip-row, .card-inner, .about-card {
+  overflow-x: hidden;
+}

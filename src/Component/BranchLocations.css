@@ -1,0 +1,91 @@
+.branch-section {
+  padding: 40px 0 56px;
+  background: #fff;
+  color: #111;
+}
+
+.left-col { padding: 18px 12px; }
+.branch-heading {
+  font-size: 34px;
+  line-height: 1.02;
+  margin: 0 0 12px;
+  font-weight: 800;
+  color: #111827;
+}
+.branch-sub {
+  color: #6b7280;
+  margin-bottom: 20px;
+  font-size: 15px;
+}
+
+/* CTA button left side */
+.branch-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 22px;
+  background: linear-gradient(90deg,#6d4ddf,#7ea1ff);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 12px 36px rgba(109,77,223,0.14);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.branch-cta .cta-icon { font-size: 16px; }
+.branch-cta:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(109,77,223,0.18); }
+
+/* branch list */
+.branch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 12px;
+}
+.branch-card {
+  border-radius: 12px;
+  padding: 22px 20px;
+  box-shadow: 0 10px 26px rgba(17,24,39,0.06);
+  min-height: 72px;
+  display:flex;
+  align-items:center;
+  transition: transform .18s ease, box-shadow .18s ease;
+  cursor: default;
+  outline: none;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+.branch-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 44px rgba(17,24,39,0.08);
+}
+
+/* branch colors */
+.card-purple { background: linear-gradient(90deg,#6d4ddf,#8f7bff); color: #fff; }
+.card-mint { background: linear-gradient(90deg,#c9efe6,#bff0e3); color: #083642; }
+.card-navy { background: linear-gradient(90deg,#07174a,#122b6c); color: #fff; }
+
+/* text */
+.branch-text {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* responsive */
+@media (max-width: 991px) {
+  .branch-heading { font-size: 28px; }
+  .branch-list { gap: 20px; }
+  .branch-card { padding: 18px; min-height: 64px; }
+  .branch-text { font-size: 17px; }
+}
+
+@media (max-width: 575px) {
+  .branch-section { padding: 24px 0 32px; }
+  .branch-heading { font-size: 24px; }
+  .branch-list { gap: 16px; }
+  .branch-card { padding: 14px; min-height: 56px; }
+  .branch-text { font-size: 16px; }
+  .branch-cta { width: 100%; justify-content: center; padding: 12px; }
+}

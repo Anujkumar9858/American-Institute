@@ -1,0 +1,26 @@
+.stat-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(16, 24, 40, 0.08);
+  min-height: 140px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(16, 24, 40, 0.12);
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0 0 10px;
+  color: #6d4ddf;
+}
+
+.stat-text {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+}

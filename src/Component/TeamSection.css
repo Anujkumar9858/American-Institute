@@ -1,0 +1,182 @@
+/* TeamSection.css - final with visible red-orange button */
+
+/* base */
+.team-section {
+  background: #1f2124; /* dark background */
+  color: #fff;
+  padding: 40px 0 64px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+/* heading */
+.team-heading-wrap {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.team-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 18px;
+}
+
+/* grid wrapper */
+.team-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* individual card */
+.team-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 18px;
+  height: 100%;
+  display: flex;
+  align-items: stretch;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: transform .22s ease, box-shadow .22s ease;
+  outline: none;
+}
+.team-card:focus {
+  box-shadow: 0 10px 30px rgba(109,77,223,0.12);
+  transform: translateY(-6px);
+}
+
+/* inner layout */
+.team-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+}
+
+/* avatar */
+.avatar-wrap {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width: 130px;
+  height: 130px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  flex-shrink: 0;
+}
+.team-avatar {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  display:block;
+  transition: transform .28s ease;
+  transform-origin: center center;
+}
+
+/* text */
+.team-name {
+  font-size: 18px;
+  font-weight: 800;
+  margin: 0;
+  color: #fff;
+  text-align: center;
+}
+.team-role {
+  font-size: 13px;
+  color: rgba(255,255,255,0.7);
+  margin: 6px 0 0;
+  text-align: center;
+  max-width: 220px;
+}
+
+/* info area */
+.team-info {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  text-align: center;
+}
+
+/* action (button at bottom) */
+.team-action {
+  margin-top: auto;
+  width: 100%;
+  display:flex;
+  justify-content:center;
+  padding-top: 10px;
+}
+
+/* know more button - high visibility */
+.know-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 22px;
+  background: #ff4757;        /* Bright Red-Orange */
+  color: #fff;
+  border-radius: 999px;
+  border: 2px solid #fff;     /* White border for visibility */
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  white-space: nowrap;
+}
+.know-btn svg {
+  font-size: 14px;
+}
+.know-btn:hover {
+  background: #e84118;        /* Darker red-orange hover */
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+}
+
+/* hover effects */
+.team-card:hover {
+  box-shadow: 0 18px 48px rgba(12,18,30,0.35);
+  transform: translateY(-6px);
+}
+.team-card:hover .team-avatar {
+  transform: scale(1.12);
+}
+
+/* responsive */
+@media (max-width: 1199px) {
+  .avatar-wrap { width: 120px; height: 120px; }
+  .team-avatar { width: 115%; height: 115%; }
+  .team-name { font-size: 17px; }
+}
+
+@media (max-width: 991px) {
+  .team-section { padding: 32px 0 48px; }
+  .avatar-wrap { width: 110px; height: 110px; }
+  .team-avatar { width: 110%; height: 110%; }
+  .team-name { font-size: 16px; }
+  .team-card { padding: 14px; }
+}
+
+@media (max-width: 575px) {
+  .team-section { padding: 24px 0 36px; }
+  .avatar-wrap { width: 96px; height: 96px; }
+  .team-avatar { width: 110%; height: 110%; }
+  .team-card { padding: 12px; border-radius: 10px; }
+  .team-title { font-size: 18px; }
+  .team-name { font-size: 15px; }
+  .team-role { font-size: 12px; max-width: 140px; }
+  .know-btn { padding: 8px 14px; font-size: 13px; }
+}
+
+/* accessibility */
+.team-card:focus-visible {
+  box-shadow: 0 12px 32px rgba(109,77,223,0.2);
+  transform: translateY(-6px);
+  outline: none;
+}
