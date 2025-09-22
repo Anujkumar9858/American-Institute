@@ -15,65 +15,55 @@ export default function NavbarAmerican() {
   const navigate = useNavigate();
   const pendingHomeScroll = useRef(false);
 
+  // track scroll -> toggle scrolled class
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const handleOutsideClick = (e) => {
-      if (!navRef.current) return;
-      if (expanded && !navRef.current.contains(e.target)) {
-        setExpanded(false);
-      }
-    };
+  // close when route changes
+  useEffect(() => setExpanded(false), [location]);
 
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [expanded]);
-
-  // Close collapse on route change
-  useEffect(() => {
-    setExpanded(false);
-  }, [location]);
-
-  // If we navigated to home and a scroll was pending, scroll to top
+  // after navigate to home, scroll to top if requested
   useEffect(() => {
     if (location.pathname === "/" && pendingHomeScroll.current) {
-      // fast, smooth scroll to top
       scroll.scrollToTop({ duration: 220, smooth: true });
       pendingHomeScroll.current = false;
     }
   }, [location]);
 
-  const logoVar = {
-    hidden: { opacity: 0, y: -6 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-  };
-  const navVar = {
-    hidden: { opacity: 0, y: -6 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, staggerChildren: 0.06 },
-    },
-  };
+  // lock body scroll when mobile menu open
+  useEffect(() => {
+    const prev = document.body.style.overflow;
+    if (expanded) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = prev || "";
+    return () => { document.body.style.overflow = prev || ""; };
+  }, [expanded]);
 
-  const handleNavLinkClick = () => setExpanded(false);
+  // click outside to close
+  useEffect(() => {
+    const onDocClick = (e) => {
+      if (!navRef.current) return;
+      if (expanded && !navRef.current.contains(e.target)) setExpanded(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    return () => document.removeEventListener("mousedown", onDocClick);
+  }, [expanded]);
 
-  // Handle Home click: if already on '/', scroll to top immediately.
-  // Otherwise navigate to '/' and remember to scroll once route changes.
   const handleHomeClick = (e) => {
-    e.preventDefault?.();
-    if (location.pathname === "/") {
-      scroll.scrollToTop({ duration: 180, smooth: true });
-    } else {
+    if (e?.preventDefault) e.preventDefault();
+    if (location.pathname === "/") scroll.scrollToTop({ duration: 180, smooth: true });
+    else {
       pendingHomeScroll.current = true;
       navigate("/");
     }
-    handleNavLinkClick();
+    setExpanded(false);
   };
+
+  const logoVar = { hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0, transition: { duration: 0.42 } } };
+  const navVar = { hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.06 } } };
 
   return (
     <Navbar
@@ -86,37 +76,29 @@ export default function NavbarAmerican() {
       ref={navRef}
     >
       <Container fluid className="nav-container">
-        <motion.div
-          className="brand-wrap"
-          initial="hidden"
-          animate="show"
-          variants={logoVar}
-        >
+        <motion.div className="brand-wrap" initial="hidden" animate="show" variants={logoVar}>
           <Navbar.Brand as={RouterLink} to="/" className="brand-text" onClick={handleHomeClick}>
             <img src={American} alt="American Institute" className="brand-logo" />
           </Navbar.Brand>
         </motion.div>
 
-        <Navbar.Toggle aria-controls="main-navbar" className="nav-toggle" onClick={() => setExpanded(!expanded)} />
+        <Navbar.Toggle
+          aria-controls="main-navbar"
+          className="nav-toggle"
+          aria-expanded={expanded}
+          onClick={() => setExpanded((s) => !s)}
+        />
 
         <Navbar.Collapse id="main-navbar" className="justify-content-end">
-          <motion.nav
-            className="nav-links"
-            initial="hidden"
-            animate="show"
-            variants={navVar}
-          >
+          <motion.nav className="nav-links" initial="hidden" animate="show" variants={navVar}>
             <Nav className="align-items-center">
 
-              {/* HOME - unified handler works from any route */}
               <Nav.Item>
-                {/* using Nav.Link as a button keeps bootstrap styles */}
                 <Nav.Link as="button" className="nav-link-item" onClick={handleHomeClick}>
                   Home
                 </Nav.Link>
               </Nav.Item>
 
-              {/* SCROLL TO COURSES / WHAT WE OFFER (only works when on home page) */}
               <Nav.Item>
                 <ScrollLink
                   to="courses-section"
@@ -124,23 +106,22 @@ export default function NavbarAmerican() {
                   duration={350}
                   offset={-88}
                   className="nav-link-item"
-                  onClick={handleNavLinkClick}
+                  onClick={() => setExpanded(false)}
                   style={{ cursor: "pointer", display: "inline-block" }}
                 >
                   Courses
                 </ScrollLink>
               </Nav.Item>
 
-              {/* Regular router links (open new route) */}
-              <Nav.Link as={RouterLink} to="/gallery" className="nav-link-item" onClick={handleNavLinkClick}>
+              <Nav.Link as={RouterLink} to="/gallery" className="nav-link-item" onClick={() => setExpanded(false)}>
                 Gallery
               </Nav.Link>
 
-              <Nav.Link as={RouterLink} to="/contact" className="nav-link-item" onClick={handleNavLinkClick}>
+              <Nav.Link as={RouterLink} to="/contact" className="nav-link-item" onClick={() => setExpanded(false)}>
                 Contact
               </Nav.Link>
 
-              <Nav.Link as={RouterLink} to="/login" className="user-link" onClick={handleNavLinkClick}>
+              <Nav.Link as={RouterLink} to="/login" className="user-link" onClick={() => setExpanded(false)}>
                 <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
                   <FaUserCircle size={22} />
                 </motion.div>

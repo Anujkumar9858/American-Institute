@@ -1,300 +1,194 @@
-/* NavbarAmerican.css — updated */
+/* NavbarAmerican.css
+   - Transparent at top
+   - White bg + shadow only when scrolled (.scrolled)
+   - Mobile centered pill menu with plain text links
+   - Ensures login/user icon (.user-link) is visible inside pill
+*/
 
-/* Ensure no unexpected horizontal overflow from elements */
+/* ---------- Reset / Base ---------- */
+* { box-sizing: border-box; }
 html, body {
   max-width: 100%;
-  overflow-x: hidden; /* safety: prevents page-level horizontal scroll */
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
 }
 
-/* Base navbar */
+/* ---------- Navbar base ---------- */
 .animated-navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   width: 100%;
-  z-index: 1100;
-  transition: all 240ms cubic-bezier(.2,.9,.3,1);
-  transform-origin: top center;
-  background: #fff;
-  padding: 16px 0;
-  box-shadow: none;
-  box-sizing: border-box;
-}
-
-/* Container */
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-left: 12px;
-  padding-right: 12px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* TOP state */
-.animated-navbar.top {
-  background: #fff;
+  z-index: 1400;
+  transition: background-color 200ms ease, box-shadow 200ms ease, padding 200ms ease;
   padding: 14px 0;
+  background: transparent;
   box-shadow: none;
 }
-
-/* SCROLLED state */
+.animated-navbar.top { background: transparent !important; box-shadow: none !important; }
 .animated-navbar.scrolled {
-  margin: 0;
-  left: 8px;
-  right: 8px;
-  top: 8px;
-  width: auto;
-  border-radius: 12px;
-  padding: 6px 8px;
-  box-shadow: 0 8px 26px rgba(12,18,30,0.08);
-  animation: navbar-pop 320ms ease;
+  left: 8px; right: 8px; top: 8px; width: auto;
+  border-radius: 10px; padding: 6px 10px;
+  background: rgba(255,255,255,0.98);
+  box-shadow: 0 10px 30px rgba(12,18,30,0.08);
 }
 
-/* Brand (left) */
-.brand-wrap { display: flex; align-items: center; flex: 0 0 auto; }
-.brand-text {
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: 0.4px;
-  transition: font-size 200ms ease, transform 200ms ease, color 200ms ease;
-  color: #111;
+/* ---------- Container / Brand ---------- */
+.nav-container {
+  max-width: 1200px; margin: 0 auto; padding: 0 12px;
+  display: flex; align-items: center; justify-content: space-between;
 }
-.animated-navbar.scrolled .brand-text {
-  font-size: 16px;
-  transform: translateY(-2px);
-  color: #111;
-}
+.brand-wrap { display: flex; align-items: center; }
+.brand-text { font-weight: 800; font-size: 20px; color: #111; text-decoration: none; }
+.brand-logo { height: 40px; width: auto; transition: transform .16s ease, height .16s ease; }
+.animated-navbar.top .brand-logo { transform: translateY(-6px); }
+.animated-navbar.scrolled .brand-logo { height: 30px; transform: translateY(0); }
 
-/* Nav area */
-.navbar-collapse {
-  flex-basis: auto;
-  display: flex;
-  align-items: center;
-}
-
-/* nav-links wrapper */
-/* increased gap for desktop but also allow per-item margins for more control */
-.nav-links {
-  display: flex;
-  gap: 32px; /* base gap between groups of links */
-  align-items: center;
-}
-
-/* Individual links */
-/* remove underline, ensure consistent spacing and use Bootstrap-friendly display */
+/* ---------- Desktop inline links ---------- */
+.nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links .nav-link-item,
 .nav-links .nav-link-item:link,
 .nav-links .nav-link-item:visited {
-  font-weight: 700;
-  font-size: 17px;
-  transition: background 180ms ease, transform 140ms ease, color 180ms ease;
-  color: #111;
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin: 0;               /* gaps handled by .nav-links gap + per-item margin below */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;   /* <-- remove underline for anchors */
-  -webkit-tap-highlight-color: transparent;
+  font-weight: 700; font-size: 16px; color: #111;
+  padding: 8px 12px; border-radius: 8px;
+  text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
+  transition: color 140ms ease;
 }
+.nav-links .nav-link-item:hover { color: #6d4ddf; }
 
-/* some browsers add underline on focus/active - explicitly prevent it */
-.nav-links .nav-link-item:hover,
-.nav-links .nav-link-item:focus,
-.nav-links .nav-link-item:active {
-  text-decoration: none;   /* keep underline removed */
-  outline: none;
-}
-
-/* Add horizontal spacing between each visible link for extra clarity */
-.nav-links .nav-link-item + .nav-link-item {
-  margin-left: 12px; /* additional gap between adjacent items */
-}
-
-/* Hover look */
-.nav-links .nav-link-item:hover {
-  color: #6d4ddf;
-  background: rgba(109,77,223,0.06);
-  transform: translateY(-2px);
-}
-
-/* Scrolled nav link smaller */
-.animated-navbar.scrolled .nav-links .nav-link-item {
-  font-size: 15px;
-  padding: 6px 10px;
-  color: #222;
-}
-
-/* User icon */
+/* user-link default styling (desktop) */
 .user-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-left: 10px;
-  transition: transform 0.28s ease, color 0.28s ease;
-}
-
-/* Navbar toggle */
-.nav-toggle {
-  border: none;
+  margin-left: 8px;
   color: #111;
-  padding: 6px 8px;
+  padding: 6px;
 }
 
-/* Collapse menu base */
-.navbar-collapse {
-  flex-basis: 100%;
-  justify-content: flex-end;
-}
+/* toggle */
+.nav-toggle { border: none; background: transparent; padding: 6px; color: #111; }
 
-/* ========== Desktop styles (>=992px) ========== */
+/* ---------- Desktop layout >=992px ---------- */
 @media (min-width: 992px) {
-  .nav-container {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    align-items: center;
-    gap: 0;
-  }
-
-  .brand-wrap {
-    grid-column: 1 / 2;
-    justify-self: start;
-    padding-left: 6px;
-  }
-
-  .navbar-collapse {
-    grid-column: 2 / 3;
-    justify-self: center;
-    display: flex;
-    align-items: center;
-    background: transparent;
-    width: auto;
-    padding: 0;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 54px; /* desktop me aur jyada gap between groups */
-  }
-
-  .nav-links .nav-link-item {
-    display: inline-flex;
-    width: auto;
-    margin: 0;
-    padding: 10px 14px;
-    font-size: 18px; /* bada font desktop pe */
-  }
-
-  /* extra spacing between the main textual links (Home/Courses/Gallery/Contact) */
-  .nav-links .nav-link-item:not(.user-link) {
-    margin-left: 6px;
-    margin-right: 6px;
-  }
-
-  .user-link { margin-left: 6px; }
+  .nav-container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+  .brand-wrap { grid-column: 1 / 2; justify-self: start; }
+  .navbar-collapse { grid-column: 2 / 3; display: flex; justify-content: center; }
+  .nav-links { gap: 54px; }
+  .nav-links .nav-link-item { font-size: 18px; padding: 10px 14px; }
   .nav-toggle { display: none !important; }
 }
 
-/* ========== Mobile styles (<992px) ========== */
+/* ---------- MOBILE: centered pill menu <=991px ---------- */
 @media (max-width: 991px) {
-  .nav-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
+  /* hide inline links (we show inside collapse) */
+  .nav-links { display: none; }
 
-  .brand-wrap { flex: 0 0 auto; }
-  .nav-toggle { display: inline-flex; }
+  .navbar-collapse.collapse { display: none; height: 0; overflow: hidden; }
+  .navbar-collapse.collapsing { display: block !important; height: auto !important; overflow: hidden; }
 
-  .navbar-collapse {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
+  /* centered pill under navbar */
+  .navbar-collapse.collapse.show {
+    display: block !important;
+    height: auto !important;
+    position: fixed;
+    top: 64px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 48px);
+    max-width: 900px;
     background: #fff;
-    padding: 8px 10px;
-    box-shadow: 0 8px 30px rgba(12,18,30,0.06);
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    box-shadow: 0 14px 40px rgba(12,18,30,0.12);
     box-sizing: border-box;
-    display: block;
+    z-index: 1499;
+    overflow: visible;
+    -webkit-overflow-scrolling: touch;
   }
 
-  .nav-links { display: block; }
-  .nav-links .nav-link-item {
-    display: block;
+  /* horizontal row inside pill */
+  .navbar-collapse.collapse.show .nav-links {
+    display: flex !important;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 4px 6px;
     width: 100%;
-    padding: 12px 16px;
-    margin: 6px 0;
-    text-align: left;
-    font-size: 16px; /* mobile pe bhi readable */
   }
 
-  .animated-navbar.scrolled {
-    left: 6px;
-    right: 6px;
-    top: 6px;
-    border-radius: 10px;
+  /* pill items - plain text (no background) */
+  .navbar-collapse.collapse.show .nav-link-item {
+    display: inline-flex !important;
+    flex: 0 0 auto;
+    white-space: nowrap;
+    padding: 8px 14px !important;
+    font-size: 15px !important;
+    margin: 0 6px !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    color: #111 !important;
+    box-shadow: none !important;
+  }
+  .navbar-collapse.collapse.show .nav-link-item:hover,
+  .navbar-collapse.collapse.show .nav-link-item:focus,
+  .navbar-collapse.collapse.show .nav-link-item:active {
+    background: transparent !important;
+    color: #111 !important;
+    transform: none !important;
   }
 
-  .animated-navbar * {
-    box-sizing: border-box;
-    max-width: 100%;
+  /* --- Make sure the user icon is visible in the pill too --- */
+  .navbar-collapse.collapse.show .user-link {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    color: #111 !important;         /* dark icon color */
+    padding: 6px 10px !important;
+    margin: 0 6px !important;
+    background: transparent !important;
+    box-shadow: none !important;
   }
 
-  .brand-text { font-size: 20px; }
-  .nav-toggle { padding: 8px; font-size: 20px; }
-}
+  /* If user-link inside nav-link-item (sometimes wrapped) ensure visible */
+  .navbar-collapse.collapse.show .nav-link-item .user-link,
+  .navbar-collapse.collapse.show .user-link .nav-link-item {
+    color: #111 !important;
+    background: transparent !important;
+  }
 
-/* Extra small phones */
-@media (max-width: 576px) {
+  /* keep navbar transparent at top even when menu open */
+  .animated-navbar.top { background: transparent !important; box-shadow: none !important; }
+  .animated-navbar.top .nav-toggle { color: #fff !important; }
+  .animated-navbar.scrolled .nav-toggle { color: #111 !important; }
+
+  /* small tweaks */
   .brand-text { font-size: 18px; }
-  .animated-navbar.top { padding: 10px 0; }
-  .animated-navbar.scrolled { padding: 6px 0; }
-
-  .nav-links .nav-link-item {
-    font-size: 15px;
-    padding: 10px 14px;
-    text-align: center;
-  }
-  .navbar-collapse { padding: 8px 10px; }
-  .nav-toggle { padding: 6px; }
-}
-
-/* Pop animation */
-@keyframes navbar-pop {
-  0% { opacity: 0; transform: translateY(-6px) scale(0.98); }
-  60% { opacity: 1; transform: translateY(0) scale(1.02); }
-  100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* ===== Brand logo size fixes ===== */
-.brand-logo {
-  display: block;
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  vertical-align: middle;
-  transition: height 180ms ease;
-}
-
-.animated-navbar.scrolled .brand-logo {
-  height: 30px;
-}
-
-@media (max-width: 991px) {
   .brand-logo { height: 34px; }
-  .animated-navbar.scrolled .brand-logo { height: 28px; }
+  .nav-toggle { padding: 8px; font-size: 20px; }
+
+  /* smallest phones */
+  @media (max-width: 576px) {
+    .navbar-collapse.collapse.show { top: 60px; width: calc(100% - 32px); }
+    .navbar-collapse.collapse.show .nav-link-item { padding: 8px 12px !important; font-size: 14px !important; margin: 0 6px !important; }
+    .navbar-collapse.collapse.show .user-link { padding: 6px 8px !important; }
+    .brand-logo { height: 30px; }
+  }
 }
 
-@media (max-width: 576px) {
-  .brand-logo { height: 30px; }
-  .animated-navbar.scrolled .brand-logo { height: 26px; }
+/* ---------- Top-state contrast (desktop only) ---------- */
+.animated-navbar.top .nav-links .nav-link-item { color: #fff !important; }
+.animated-navbar.top .user-link { color: #fff !important; }
+
+/* ---------- Ensure pill links visible when menu open (safety) ---------- */
+.animated-navbar.top .navbar-collapse.collapse.show .nav-link-item,
+.navbar-collapse.collapse.show .nav-link-item {
+  color: #111 !important;
 }
+
+/* ---------- Accessibility ---------- */
+.nav-link-item:focus { outline: 2px solid rgba(109,77,223,0.14); outline-offset: 2px; }
