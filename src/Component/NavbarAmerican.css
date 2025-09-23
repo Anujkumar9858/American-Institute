@@ -21,7 +21,7 @@ html, body {
   top: 0; left: 0; right: 0;
   width: 100%;
   z-index: 1400;
-  transition: background-color 200ms ease, box-shadow 200ms ease, padding 200ms ease;
+  transition: background-color 200ms ease, box-shadow 200ms ease, padding 200ms ease, left 200ms ease, right 200ms ease;
   padding: 14px 0;
   background: transparent;
   box-shadow: none;
@@ -34,28 +34,56 @@ html, body {
   box-shadow: 0 10px 30px rgba(12,18,30,0.08);
 }
 
-/* ---------- Container / Brand ---------- */
-.nav-container {
-  max-width: 1200px; margin: 0 auto; padding: 0 12px;
-  display: flex; align-items: center; justify-content: space-between;
+/* ---------- Full-width custom container (logo left, links right) ---------- */
+.nav-full {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* logo left, everything else right */
+  width: 100%;
+  padding: 0 20px;
 }
+
+/* brand */
 .brand-wrap { display: flex; align-items: center; }
-.brand-text { font-weight: 800; font-size: 20px; color: #111; text-decoration: none; }
+.brand-text { font-weight: 800; font-size: 20px; color: #111; text-decoration: none; display: flex; align-items: center; }
 .brand-logo { height: 40px; width: auto; transition: transform .16s ease, height .16s ease; }
 .animated-navbar.top .brand-logo { transform: translateY(-6px); }
 .animated-navbar.scrolled .brand-logo { height: 30px; transform: translateY(0); }
 
+/* right side wrapper so toggle + collapse align right nicely */
+.right-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 /* ---------- Desktop inline links ---------- */
-.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links { 
+  display: flex; 
+  gap: 32px;   /* ✅ equal gap desktop pe */
+  align-items: center; 
+}
 .nav-links .nav-link-item,
 .nav-links .nav-link-item:link,
 .nav-links .nav-link-item:visited {
-  font-weight: 700; font-size: 16px; color: #111;
-  padding: 8px 12px; border-radius: 8px;
-  text-decoration: none; display: inline-flex; align-items: center; justify-content: center;
-  transition: color 140ms ease;
+  font-weight: 700;
+  font-size: 16px;  /* ✅ equal font-size */
+  color: #111;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 180ms ease, transform 220ms ease; /* ✅ smooth animation */
+  background: transparent;
+  border: none;
+  cursor: pointer;
 }
-.nav-links .nav-link-item:hover { color: #6d4ddf; }
+.nav-links .nav-link-item:hover {
+  color: #6d4ddf;
+  transform: translateY(-2px) scale(1.05); /* ✅ animated hover effect */
+}
 
 /* user-link default styling (desktop) */
 .user-link {
@@ -68,15 +96,13 @@ html, body {
 }
 
 /* toggle */
-.nav-toggle { border: none; background: transparent; padding: 6px; color: #111; }
+.nav-toggle { border: none; background: transparent; padding: 6px; color: #111; cursor: pointer; }
 
 /* ---------- Desktop layout >=992px ---------- */
 @media (min-width: 992px) {
-  .nav-container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
-  .brand-wrap { grid-column: 1 / 2; justify-self: start; }
-  .navbar-collapse { grid-column: 2 / 3; display: flex; justify-content: center; }
-  .nav-links { gap: 54px; }
-  .nav-links .nav-link-item { font-size: 18px; padding: 10px 14px; }
+  .nav-full { padding: 0 28px; }
+  .nav-links { gap: 32px; }   /* ✅ maintain gap */
+  .nav-links .nav-link-item { font-size: 16px; padding: 10px 14px; }
   .nav-toggle { display: none !important; }
 }
 
@@ -85,6 +111,7 @@ html, body {
   /* hide inline links (we show inside collapse) */
   .nav-links { display: none; }
 
+  .navbar-collapse { transition: none; }
   .navbar-collapse.collapse { display: none; height: 0; overflow: hidden; }
   .navbar-collapse.collapsing { display: block !important; height: auto !important; overflow: hidden; }
 
@@ -112,12 +139,12 @@ html, body {
   .navbar-collapse.collapse.show .nav-links {
     display: flex !important;
     flex-direction: row;
-    gap: 10px;
+    gap: 20px;   /* ✅ equal gap mobile pe */
     align-items: center;
     justify-content: center;
     overflow-x: auto;
     white-space: nowrap;
-    padding: 4px 6px;
+    padding: 6px 10px;
     width: 100%;
   }
 
@@ -127,19 +154,17 @@ html, body {
     flex: 0 0 auto;
     white-space: nowrap;
     padding: 8px 14px !important;
-    font-size: 15px !important;
-    margin: 0 6px !important;
+    font-size: 16px !important; /* ✅ equal font-size mobile me bhi */
+    margin: 0 !important;
     border-radius: 0 !important;
     background: transparent !important;
     color: #111 !important;
     box-shadow: none !important;
+    transition: color 180ms ease, transform 220ms ease;
   }
-  .navbar-collapse.collapse.show .nav-link-item:hover,
-  .navbar-collapse.collapse.show .nav-link-item:focus,
-  .navbar-collapse.collapse.show .nav-link-item:active {
-    background: transparent !important;
-    color: #111 !important;
-    transform: none !important;
+  .navbar-collapse.collapse.show .nav-link-item:hover {
+    color: #6d4ddf !important;
+    transform: translateY(-2px) scale(1.05); /* ✅ hover animation mobile pe bhi */
   }
 
   /* --- Make sure the user icon is visible in the pill too --- */
@@ -147,18 +172,11 @@ html, body {
     display: inline-flex !important;
     align-items: center;
     justify-content: center;
-    color: #111 !important;         /* dark icon color */
+    color: #111 !important;
     padding: 6px 10px !important;
-    margin: 0 6px !important;
+    margin: 0 !important;
     background: transparent !important;
     box-shadow: none !important;
-  }
-
-  /* If user-link inside nav-link-item (sometimes wrapped) ensure visible */
-  .navbar-collapse.collapse.show .nav-link-item .user-link,
-  .navbar-collapse.collapse.show .user-link .nav-link-item {
-    color: #111 !important;
-    background: transparent !important;
   }
 
   /* keep navbar transparent at top even when menu open */
@@ -174,7 +192,7 @@ html, body {
   /* smallest phones */
   @media (max-width: 576px) {
     .navbar-collapse.collapse.show { top: 60px; width: calc(100% - 32px); }
-    .navbar-collapse.collapse.show .nav-link-item { padding: 8px 12px !important; font-size: 14px !important; margin: 0 6px !important; }
+    .navbar-collapse.collapse.show .nav-link-item { padding: 8px 12px !important; font-size: 16px !important; }
     .navbar-collapse.collapse.show .user-link { padding: 6px 8px !important; }
     .brand-logo { height: 30px; }
   }

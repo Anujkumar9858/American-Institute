@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
@@ -13,21 +13,55 @@ export default function WhyChooseUs() {
       title: "On stage practice",
       desc: "Helps students build confidence and be fluent in communication",
       color: "#0d1b8c",
-      img: Stage_practice
+      img: Stage_practice,
     },
     {
       title: "Group Discussion",
       desc: "Here students learn to communicate and share their views on any topic.",
       color: "#aef1d1",
-      img: Group_discussion
+      img: Group_discussion,
     },
     {
       title: "Corporate Interview practices",
       desc: "Helps in future ready for company.",
       color: "#8fb3ff",
-      img: Interview_practice
-    }
+      img: Interview_practice,
+    },
   ];
+
+  // ---- Typed effect for subtitle ----
+  const subtitles = [
+    "We Don’t Just Teach English, We Build Speakers.",
+    "We Transform Hesitation Into Confidence.",
+    "Practical Training, Real Speaking Confidence.",
+  ];
+
+  const [typed, setTyped] = useState("");
+  const [index, setIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    const current = subtitles[index % subtitles.length];
+    const timeout = setTimeout(() => {
+      if (!isDeleting) {
+        setTyped(current.slice(0, charIndex + 1));
+        setCharIndex((c) => c + 1);
+        if (charIndex + 1 === current.length) {
+          setTimeout(() => setIsDeleting(true), 1200);
+        }
+      } else {
+        setTyped(current.slice(0, charIndex - 1));
+        setCharIndex((c) => c - 1);
+        if (charIndex - 1 === 0) {
+          setIsDeleting(false);
+          setIndex((i) => i + 1);
+        }
+      }
+    }, isDeleting ? 45 : 60);
+
+    return () => clearTimeout(timeout);
+  }, [charIndex, isDeleting, index, subtitles]);
 
   return (
     <section className="choose-section">
@@ -38,19 +72,20 @@ export default function WhyChooseUs() {
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
           Why Choose us
         </motion.h2>
 
         <motion.p
-          className="choose-subtitle text-center"
+          className="choose-subtitle text-center typed-subtitle"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true, amount: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
         >
-          "We Don’t Just Teach English, We Build Speakers."
+          {typed}
+          <span className="typed-cursor" />
         </motion.p>
 
         {/* Cards */}
@@ -62,7 +97,7 @@ export default function WhyChooseUs() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: idx * 0.3 }}
-                viewport={{ once: true, amount: 0.5 }}
+                viewport={{ once: true, amount: 0.4 }}
                 whileHover={{ scale: 1.05 }}
               >
                 {/* top content */}

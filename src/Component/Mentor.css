@@ -1,4 +1,6 @@
-/* Mentor component styles with animations */
+/* Mentor component styles with animations (complete) */
+
+/* Base section */
 .mentor-section {
   background: #1f2426;
   color: #f4f6f7;
@@ -39,9 +41,50 @@
   transition: opacity 600ms cubic-bezier(.2,.9,.3,1), transform 600ms cubic-bezier(.2,.9,.3,1);
 }
 
+/* ---------- Typed text / premium micro-vibe ---------- */
+.mentor-typed-wrap {
+  margin: 6px 0 18px 0;
+  min-height: 30px;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 600ms cubic-bezier(.2,.9,.3,1), transform 600ms cubic-bezier(.2,.9,.3,1);
+  font-weight: 600;
+  color: #eaf0ff;
+  letter-spacing: 0.2px;
+}
+
+/* main typed text */
+.mentor-typed {
+  display: inline-block;
+  font-size: 16px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.94), rgba(190,200,255,0.9));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* blinking cursor */
+.typed-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.05em;
+  margin-left: 6px;
+  background: linear-gradient(180deg, #fff, #d6e4ff);
+  border-radius: 2px;
+  opacity: 1;
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  0%, 60% { opacity: 1; transform: translateY(0); }
+  61%, 100% { opacity: 0; transform: translateY(-2px); }
+}
+
 /* Image card and image */
 .mentor-card {
-  background: transparent;
+  position: relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
   padding: 8px;
   display: inline-block;
   border-radius: 26px;
@@ -51,7 +94,24 @@
   transition: transform 700ms cubic-bezier(.2,.9,.3,1), opacity 700ms ease;
 }
 
+/* decorative soft glow */
+.mentor-glow-ornament {
+  position: absolute;
+  left: -12%;
+  top: -8%;
+  width: 140%;
+  height: 120%;
+  border-radius: 30%;
+  filter: blur(30px);
+  background: radial-gradient(circle at 20% 20%, rgba(125,77,223,0.16), rgba(126,161,255,0.06) 30%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ensure image stays above glow */
 .mentor-img {
+  position: relative;
+  z-index: 1;
   width: 300px;
   height: 300px;
   object-fit: cover;
@@ -98,6 +158,12 @@
   transform: translateY(0);
 }
 
+/* Reveal typed area */
+.mentor-section.in-view .mentor-typed-wrap {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Reveal lines with stagger via inline transitionDelay set in React */
 .mentor-section.in-view .reveal-line {
   opacity: 1;
@@ -120,10 +186,20 @@
 .mentor-card:hover { transform: translateY(-6px) scale(1.02); transition: transform 320ms ease; }
 .know-btn:hover { transform: translateY(-6px); transition: transform 220ms ease; }
 
+/* Button micro-polish (tweak kept for consistency) */
+.know-btn {
+  box-shadow: 0 10px 30px rgba(125, 110, 255, 0.16);
+}
+.know-btn:active { transform: translateY(-2px) scale(0.99); }
+
+/* MentorDetail tweaks */
+.card { border-radius: 16px; }
+
 /* Responsive */
 @media (max-width: 991px) {
   .mentor-img { width: 260px; height: 260px; border-radius: 18px; }
   .section-subtitle { font-size: 30px; }
+  .mentor-typed { font-size: 15px; }
 }
 
 @media (max-width: 576px) {
@@ -131,10 +207,4 @@
   .mentor-img { width: 200px; height: 200px; }
   .section-subtitle { font-size: 24px; }
   .know-btn { padding: 10px 16px; font-size: 14px; }
-}
-
-/* MentorDetail tweaks */
-.card { border-radius: 16px; }
-@media (max-width: 992px) {
-  .mentor-img { width: 260px; height: 260px; }
 }

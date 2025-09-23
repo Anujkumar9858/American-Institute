@@ -15,6 +15,31 @@
   margin-top: 10px;
 }
 
+/* --- Typed subtitle effect --- */
+.typed-subtitle {
+  font-size: 16px;
+  font-style: italic;
+  color: #555;
+  margin-top: 10px;
+  min-height: 22px; /* space reserve so layout stable */
+}
+
+.typed-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  margin-left: 4px;
+  background: #444;
+  animation: blink 1s steps(2, start) infinite;
+  vertical-align: bottom;
+}
+
+@keyframes blink {
+  0%, 60% { opacity: 1; }
+  61%, 100% { opacity: 0; }
+}
+
+/* --- Card styles --- */
 .choose-card {
   border-radius: 20px;
   overflow: hidden;

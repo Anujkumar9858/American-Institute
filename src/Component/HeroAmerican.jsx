@@ -1,72 +1,106 @@
-// src/Component/HeroAmerican.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./HeroAmerican.css";
 
+/* Reusable Typewriter Component */
+const Typewriter = ({ text = "", speed = 45, startDelay = 120, onDone }) => {
+  const [display, setDisplay] = useState("");
+  useEffect(() => {
+    const prefersReduced =
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      setDisplay(text);
+      if (onDone) onDone();
+      return;
+    }
+
+    let mounted = true;
+    let i = 0;
+    const timer = setTimeout(() => {
+      const id = setInterval(() => {
+        if (!mounted) return;
+        if (i >= text.length) {
+          clearInterval(id);
+          if (onDone) onDone();
+          return;
+        }
+        setDisplay((prev) => prev + text.charAt(i));
+        i += 1;
+      }, speed);
+    }, startDelay);
+
+    return () => {
+      mounted = false;
+      clearTimeout(timer);
+    };
+  }, [text, speed, startDelay, onDone]);
+
+  return (
+    <span className="typewriter-inline">
+      {display}
+      <span aria-hidden="true" className="typewriter-cursor" />
+    </span>
+  );
+};
+
 const HeroAmerican = () => {
   const navigate = useNavigate();
 
-  // Smooth scroll helper that accounts for fixed navbar height
   const scrollToCourses = (attempts = 0) => {
     const id = "courses-section";
     const el = document.getElementById(id);
     if (el) {
-      // scroll to element smoothly and offset for a fixed navbar (approx 88px)
       const navOffset = 88;
       const top = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
       window.scrollTo({ top, behavior: "smooth" });
       return true;
     }
-
-    // If not found and we haven't tried navigation yet, go to home and retry shortly
     if (attempts === 0) {
       navigate("/", { replace: false });
-      // retry after a short delay to allow the homepage to mount (works in most SPA setups)
-      // If your app uses heavy server-side rendering or very long mount times, increase the timeout.
       setTimeout(() => scrollToCourses(1), 220);
       return false;
     }
-
-    // failed after retry
     return false;
   };
 
   return (
-    // id used by react-scroll in Navbar (if you use that later)
     <section id="home-section" className="hero-section text-white" aria-label="Hero: Welcome">
       <div className="overlay d-flex align-items-center">
         <Container className="hero-inner">
+          {/* Heading */}
           <motion.h1
             className="fw-bold hero-title"
             initial={{ opacity: 0, y: 18, scale: 0.996 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
-            Welcome to the Place
-            <br />
-            where Confidence {" "}
-            {/* <motion.span
-              className="highlight"
-              initial={{ scale: 0.98, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.12 }}
-            >
-              Confidence
-            </motion.span>{" "} */}
-            Begins
+            <div>
+              <Typewriter text={"Welcome to the Place"} speed={40} startDelay={80} />
+            </div>
+            <div>
+              <Typewriter text={"where Confidence Begins"} speed={40} startDelay={900} />
+            </div>
           </motion.h1>
 
+          {/* Subtitle */}
           <motion.p
             className="hero-sub mt-3"
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 0.95, y: 0 }}
             transition={{ duration: 0.6, delay: 0.18 }}
           >
-            Practical speaking practice • Live mentor sessions • Real results
+            <Typewriter
+              text={"Practical speaking practice • Live mentor sessions • Real results"}
+              speed={30}
+              startDelay={1700}
+            />
           </motion.p>
 
+          {/* Buttons */}
           <motion.div
             className="hero-cta mt-4"
             initial={{ opacity: 0, y: 8 }}
@@ -80,7 +114,7 @@ const HeroAmerican = () => {
               onClick={() => navigate("/free-demo")}
               aria-label="Enroll now — Get free demo"
             >
-              Enroll now
+              <Typewriter text={"Enroll now"} speed={50} startDelay={2500} />
             </Button>
 
             <motion.button
@@ -89,7 +123,7 @@ const HeroAmerican = () => {
               onClick={() => scrollToCourses()}
               aria-label="Explore courses"
             >
-              Explore courses →
+              <Typewriter text={"Explore courses →"} speed={50} startDelay={3200} />
             </motion.button>
           </motion.div>
         </Container>

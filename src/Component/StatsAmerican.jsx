@@ -1,27 +1,92 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { motion } from "framer-motion";
 import "./StatsAmerican.css";
 
-const CountUp = ({ end, duration }) => {
+/* CountUp now waits for `start` prop before animating */
+const CountUp = ({ end, duration = 2, start = false }) => {
   const [count, setCount] = useState(0);
+  const startedRef = useRef(false);
 
   useEffect(() => {
-    let start = 0;
-    const increment = end / (duration * 60); // 60 fps approx
+    if (!start) return;
+    if (startedRef.current) return;
+    startedRef.current = true;
+
+    let startVal = 0;
+    const steps = Math.max(1, Math.floor(duration * 60));
+    const increment = end / steps;
+    const intervalMs = Math.max(10, Math.floor((duration * 1000) / steps));
+
     const timer = setInterval(() => {
-      start += increment;
-      if (start >= end) {
+      startVal += increment;
+      if (startVal >= end) {
         clearInterval(timer);
         setCount(end);
       } else {
-        setCount(Math.floor(start));
+        setCount(Math.floor(startVal));
       }
-    }, 25);
-    return () => clearInterval(timer);
-  }, [end, duration]);
+    }, intervalMs);
 
-  return <span>{count.toLocaleString()}+</span>;
+    return () => clearInterval(timer);
+  }, [end, duration, start]);
+
+  return (
+    <span className="gradient-number">
+      {count.toLocaleString()}<span className="plus-sign">+</span>
+    </span>
+  );
+};
+
+/* Typewriter that only runs when `active` becomes true and hides cursor on done */
+const Typewriter = ({ text = "", speed = 26, startDelay = 0, active = false, onDone }) => {
+  const [display, setDisplay] = useState("");
+  const [done, setDone] = useState(false);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    const prefersReduced =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      setDisplay(text);
+      setDone(true);
+      if (onDone) onDone();
+      return;
+    }
+
+    if (!active) return; // wait until active becomes true
+    if (startedRef.current) return;
+    startedRef.current = true;
+
+    let mounted = true;
+    let i = 0;
+    const startTimer = setTimeout(() => {
+      const id = setInterval(() => {
+        if (!mounted) return;
+        if (i >= text.length) {
+          clearInterval(id);
+          setDone(true); // hide cursor when finished
+          if (onDone) onDone();
+          return;
+        }
+        setDisplay((prev) => prev + text.charAt(i));
+        i += 1;
+      }, speed);
+    }, startDelay);
+
+    return () => {
+      mounted = false;
+      clearTimeout(startTimer);
+    };
+  }, [text, speed, startDelay, active, onDone]);
+
+  return (
+    <span className="stat-typewriter">
+      {display}
+      {!done && <span aria-hidden="true" className="stat-typewriter-cursor" />}
+    </span>
+  );
 };
 
 const StatsAmerican = () => {
@@ -31,26 +96,51 @@ const StatsAmerican = () => {
     { number: 12000, text: "Students taught and get placed at companies" },
   ];
 
+  // track which cards have been activated (in-view)
+  const [activated, setActivated] = useState(() => new Array(stats.length).fill(false));
+
+  const handleEnter = (idx) => {
+    setActivated((prev) => {
+      if (prev[idx]) return prev;
+      const copy = [...prev];
+      copy[idx] = true;
+      return copy;
+    });
+  };
+
   return (
     <Container className="my-5">
       <Row>
-        {stats.map((stat, idx) => (
-          <Col key={idx} md={4} className="mb-3">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: idx * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <Card className="stat-card p-4 border-0">
-                <h2 className="stat-number">
-                  <CountUp end={stat.number} duration={2} />
-                </h2>
-                <p className="stat-text">{stat.text}</p>
-              </Card>
-            </motion.div>
-          </Col>
-        ))}
+        {stats.map((stat, idx) => {
+          const countDuration = 2; // seconds
+          const typeStartDelay = 120; // ms after activation
+
+          return (
+            <Col key={idx} md={4} className="mb-3">
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.12 }}
+                viewport={{ once: true, amount: 0.5 }}
+                onViewportEnter={() => handleEnter(idx)}
+              >
+                <Card className="stat-card p-4 border-0">
+                  <h2 className="stat-number">
+                    <CountUp end={stat.number} duration={countDuration} start={activated[idx]} />
+                  </h2>
+                  <p className="stat-text">
+                    <Typewriter
+                      text={stat.text}
+                      speed={26}
+                      startDelay={typeStartDelay}
+                      active={activated[idx]}
+                    />
+                  </p>
+                </Card>
+              </motion.div>
+            </Col>
+          );
+        })}
       </Row>
     </Container>
   );
