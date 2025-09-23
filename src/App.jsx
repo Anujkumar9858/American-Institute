@@ -60,6 +60,7 @@ function App() {
         {/* Auth */}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        
 
         {/* Core pages */}
         <Route path="/contact" element={<ContactPage />} />
