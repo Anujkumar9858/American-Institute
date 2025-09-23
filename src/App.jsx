@@ -28,6 +28,7 @@ import GalleryPage from "./Component/GalleryPage"; // ensure this file exists (G
 // global css & libs
 import "bootstrap/dist/css/bootstrap.min.css";
 import "leaflet/dist/leaflet.css";
+import AboutInstitute from "./Component/AboutInstitute";
 
 function App() {
   return (

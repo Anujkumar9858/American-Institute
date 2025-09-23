@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaArrowRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"; // <-- use Link for robust navigation
 import { motion } from "framer-motion";
 import Sir from "./Image/Sameer_sir.jpg";
 import "./Mentor.css";
@@ -10,7 +10,6 @@ import "./Mentor.css";
 export default function Mentor() {
   const containerRef = useRef(null);
   const [inView, setInView] = useState(false);
-  const navigate = useNavigate();
 
   const mentor = {
     slug: "sameer",
@@ -28,7 +27,7 @@ export default function Mentor() {
     ]
   };
 
-  // ---------- Intersection Observer (10% visible pe hi trigger kare) ----------
+  // Intersection Observer
   useEffect(() => {
     const elem = containerRef.current;
     if (!elem) return;
@@ -41,20 +40,20 @@ export default function Mentor() {
           }
         });
       },
-      { threshold: [0.1, 0.25, 0.5, 0.75, 1] } // 10% visibility ke baad trigger
+      { threshold: [0.1, 0.25, 0.5, 0.75, 1] }
     );
     io.observe(elem);
     return () => io.disconnect();
   }, []);
 
-  // ---------- Typed text effect ----------
+  // Typed text effect (unchanged)
   const [typed, setTyped] = useState("");
   const [tagIndex, setTagIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    if (!inView) return; // start typing only when visible
+    if (!inView) return;
 
     const timeout = setTimeout(() => {
       const currentTag = mentor.taglines[tagIndex % mentor.taglines.length];
@@ -127,22 +126,21 @@ export default function Mentor() {
               <div className="mentor-glow-ornament" aria-hidden="true" />
             </motion.div>
 
-            <div
-              className={`d-inline-block ms-lg-4 mt-3 mt-lg-0 ${
-                inView ? "reveal-button" : ""
-              }`}
-            >
-              <motion.button
-                className="know-btn"
-                onClick={() => navigate(`/mentor/${mentor.slug}`)}
-                aria-label={`Know more about ${mentor.name}`}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span>Know More</span>
-                <span className="k-icon">
-                  <FaArrowRight />
-                </span>
-              </motion.button>
+            <div className={`d-inline-block ms-lg-4 mt-3 mt-lg-0 ${inView ? "reveal-button" : ""}`}>
+              {/* Use Link for navigation so it's less likely to be blocked by event handlers */}
+              <motion.div whileTap={{ scale: 0.98 }}>
+                <Link
+                  to={`/mentor/${mentor.slug}`}
+                  className="know-btn d-inline-flex align-items-center text-decoration-none"
+                  aria-label={`Know more about ${mentor.name}`}
+                  onClick={() => console.log("navigating to:", `/mentor/${mentor.slug}`)}
+                >
+                  <span>Know More</span>
+                  <span className="k-icon ms-2">
+                    <FaArrowRight />
+                  </span>
+                </Link>
+              </motion.div>
             </div>
           </Col>
         </Row>

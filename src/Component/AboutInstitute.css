@@ -1,29 +1,24 @@
-/* AboutInstitute.css - tightened so it never overflows the screen */
+/* AboutInstitute.css - tightened + typewriter + subtle polish */
 
 /* reset box sizing for safety */
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
-/* variables */
-:root {
+:root{
   --blue-1: #697bff;
   --blue-2: #7ea1ff;
   --white: #ffffff;
   --text-muted: rgba(255,255,255,0.95);
+  --muted-para: rgba(255,255,255,0.92);
 }
 
 /* wrapper */
-.about-institute-section {
-  background: transparent;
-  padding: 20px 0 40px;
-}
+.about-institute-section { background: transparent; padding: 28px 0 48px; }
 
-/* main rounded panel - constrain width and center */
+/* main panel */
 .about-card {
-  max-width: 1150px;       /* prevent full-bleed on very large screens */
+  max-width: 1150px;
   margin: 0 auto;
   background: linear-gradient(90deg, var(--blue-1) 0%, var(--blue-2) 100%);
   border-radius: 14px;
@@ -31,21 +26,18 @@
   box-shadow: 0 12px 36px rgba(20,30,80,0.06);
 }
 
-/* left block (blue area with text) */
+/* left block */
 .about-left {
   color: var(--white);
   min-height: 180px;
-  border-top-left-radius: 14px;
-  border-bottom-left-radius: 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  padding: 28px;
 }
 
-/* heading - reduced and responsive */
 .about-head {
-  font-size: 40px;    /* reduced from very large */
+  font-size: 40px;
   font-weight: 800;
   margin: 4px 0 12px;
   letter-spacing: -0.4px;
@@ -54,57 +46,64 @@
 
 /* paragraphs */
 .about-copy p {
-  color: var(--text-muted);
+  color: var(--muted-para);
   line-height: 1.6;
   font-size: 14px;
   margin-bottom: 8px;
   max-width: 640px;
 }
 
-/* smaller supporting text */
 .about-sub {
-  color: rgba(255,255,255,0.9);
+  color: rgba(255,255,255,0.92);
   font-size: 13px;
   margin-top: 6px;
 }
 
-/* right block: image */
-.about-right {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+/* typewriter box */
+.about-typebox { margin-top: 12px; }
+.ai-typewriter {
+  display: inline-block;
+  font-weight: 800;
+  font-size: 14.5px;
+  color: #fff;
+  background: rgba(255,255,255,0.06);
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
+.ai-cursor {
+  display:inline-block;
+  width: 2px;
+  height: 1.02em;
+  background: #fff;
+  margin-left: 8px;
+  vertical-align: middle;
+  animation: ai-blink 1s steps(1,end) infinite;
+}
+@keyframes ai-blink { 50% { opacity: 0 } }
 
-/* image container */
+/* right block image */
+.about-right { display:flex; align-items:center; justify-content:center; padding:16px; }
 .about-image-wrap {
   width: 100%;
-  max-width: 320px;
-  height: 180px;
+  max-width: 340px;
+  height: 200px;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 12px 30px rgba(0,0,0,0.06);
   background: #fff;
 }
+.about-image { width: 100%; height: 100%; object-fit: cover; display:block; }
 
-/* img itself */
-.about-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* Smaller devices: stack vertically and reduce sizes */
+/* responsive */
 @media (max-width: 991px) {
   .about-card { max-width: 92%; }
   .about-head { font-size: 34px; }
-  .about-image-wrap { max-width: 280px; height: 160px; }
+  .about-image-wrap { max-width: 300px; height: 180px; }
 }
-
 @media (max-width: 767px) {
   .about-card { border-radius: 12px; }
-  .about-left, .about-right { border-radius: 0; padding: 18px; }
+  .about-left, .about-right { padding: 18px; }
   .about-left { order: 1; }
   .about-right { order: 2; margin-top: 12px; }
   .about-head { font-size: 28px; text-align: left; }
@@ -113,4 +112,4 @@
 }
 
 /* tiny polish */
-.about-card img { display: block; }
+.about-card img { display:block; }
