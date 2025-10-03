@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Nav, Navbar } from "react-bootstrap";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 import { Link as ScrollLink, animateScroll as scroll } from "react-scroll";
-import { FaUserCircle } from "react-icons/fa";
 import { motion } from "framer-motion";
-import American from "./Image/american_logo_transparent.png";
+import { FaUserCircle, FaSignOutAlt } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
+import American from "../Component/Image/american_logo_transparent.png";
 import "./NavbarAmerican.css";
 
 export default function NavbarAmerican() {
@@ -15,7 +16,10 @@ export default function NavbarAmerican() {
   const navigate = useNavigate();
   const pendingHomeScroll = useRef(false);
 
-  // track scroll -> toggle scrolled class
+  const { role, logout } = useAuth();
+
+  const isHomePage = location.pathname === "/"; // ✅ check route
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 48);
     onScroll();
@@ -23,68 +27,46 @@ export default function NavbarAmerican() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // close when route changes
   useEffect(() => setExpanded(false), [location]);
 
-  // after navigate to home, scroll to top if requested
-  useEffect(() => {
-    if (location.pathname === "/" && pendingHomeScroll.current) {
-      scroll.scrollToTop({ duration: 220, smooth: true });
-      pendingHomeScroll.current = false;
-    }
-  }, [location]);
-
-  // lock body scroll when mobile menu open
-  useEffect(() => {
-    const prev = document.body.style.overflow;
-    if (expanded) document.body.style.overflow = "hidden";
-    else document.body.style.overflow = prev || "";
-    return () => {
-      document.body.style.overflow = prev || "";
-    };
-  }, [expanded]);
-
-  // click outside to close
-  useEffect(() => {
-    const onDocClick = (e) => {
-      if (!navRef.current) return;
-      if (expanded && !navRef.current.contains(e.target)) setExpanded(false);
-    };
-    document.addEventListener("mousedown", onDocClick);
-    return () => document.removeEventListener("mousedown", onDocClick);
-  }, [expanded]);
-
   const handleHomeClick = (e) => {
-    if (e?.preventDefault) e.preventDefault();
-    if (location.pathname === "/") scroll.scrollToTop({ duration: 180, smooth: true });
-    else {
+    e?.preventDefault();
+    if (location.pathname === "/") {
+      scroll.scrollToTop({ duration: 180, smooth: true });
+    } else {
       pendingHomeScroll.current = true;
       navigate("/");
     }
     setExpanded(false);
   };
 
-  const logoVar = { hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0, transition: { duration: 0.42 } } };
-  const navVar = { hidden: { opacity: 0, y: -6 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.06 } } };
+  const logoVar = {
+    hidden: { opacity: 0, y: -6 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.42 } },
+  };
+  const navVar = {
+    hidden: { opacity: 0, y: -6 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6, staggerChildren: 0.06 } },
+  };
 
   return (
     <Navbar
       expand="lg"
       expanded={expanded}
-      onToggle={(val) => setExpanded(val)}
       collapseOnSelect
-      className={`animated-navbar ${scrolled ? "scrolled" : "top"}`}
+      className={`animated-navbar ${scrolled ? "scrolled" : "top"} ${!isHomePage ? "force-dark" : ""}`} 
       fixed="top"
       ref={navRef}
     >
-      {/* full-width custom container so logo left and links right */}
       <div className="nav-full">
+        {/* Brand Logo */}
         <motion.div className="brand-wrap" initial="hidden" animate="show" variants={logoVar}>
           <Navbar.Brand as={RouterLink} to="/" className="brand-text" onClick={handleHomeClick}>
             <img src={American} alt="American Institute" className="brand-logo" />
           </Navbar.Brand>
         </motion.div>
 
+        {/* Right side controls */}
         <div className="right-controls">
           <Navbar.Toggle
             aria-controls="main-navbar"
@@ -124,11 +106,20 @@ export default function NavbarAmerican() {
                   Contact
                 </Nav.Link>
 
-                <Nav.Link as={RouterLink} to="/login" className="user-link" onClick={() => setExpanded(false)}>
-                  <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
-                    <FaUserCircle size={22} />
-                  </motion.div>
-                </Nav.Link>
+                {/* ✅ Login / Logout toggle */}
+                {role ? (
+                  <Nav.Link as="button" className="user-link" onClick={logout}>
+                    <motion.div whileHover={{ scale: 1.2 }} transition={{ duration: 0.3 }}>
+                      <FaSignOutAlt size={22} />
+                    </motion.div>
+                  </Nav.Link>
+                ) : (
+                  <Nav.Link as={RouterLink} to="/login" className="user-link" onClick={() => setExpanded(false)}>
+                    <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
+                      <FaUserCircle size={22} />
+                    </motion.div>
+                  </Nav.Link>
+                )}
               </Nav>
             </motion.nav>
           </Navbar.Collapse>
