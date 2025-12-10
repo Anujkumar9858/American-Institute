@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { FaArrowRight, FaPlay } from "react-icons/fa";
 import "./HeroAmerican.css";
+import hero2 from "./Image/Hero2.jpg";
 
 /* Reusable Typewriter Component */
 const Typewriter = ({ text = "", speed = 45, startDelay = 120, onDone }) => {
@@ -68,66 +70,73 @@ const HeroAmerican = () => {
   };
 
   return (
-    <section id="home-section" className="hero-section text-white" aria-label="Hero: Welcome">
-      <div className="overlay d-flex align-items-center">
-        <Container className="hero-inner">
-          {/* Heading */}
-          <motion.h1
-            className="fw-bold hero-title"
-            initial={{ opacity: 0, y: 18, scale: 0.996 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-          >
-            <div>
-              <Typewriter text={"Welcome to the Place"} speed={40} startDelay={80} />
-            </div>
-            <div>
-              <Typewriter text={"where Confidence Begins"} speed={40} startDelay={900} />
-            </div>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            className="hero-sub mt-3"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 0.95, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.18 }}
-          >
-            <Typewriter
-              text={"Practical speaking practice • Live mentor sessions • Real results"}
-              speed={30}
-              startDelay={1700}
-            />
-          </motion.p>
-
-          {/* Buttons */}
-          <motion.div
-            className="hero-cta mt-4"
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.28 }}
-          >
-            <Button
-              variant="primary"
-              size="lg"
-              className="rounded-pill px-4 py-2 hero-enroll"
-              onClick={() => navigate("/free-demo")}
-              aria-label="Enroll now — Get free demo"
-            >
-              <Typewriter text={"Enroll now"} speed={50} startDelay={2500} />
-            </Button>
-
-            <motion.button
-              className="btn btn-link hero-secondary ms-3"
-              whileHover={{ x: 6 }}
-              onClick={() => scrollToCourses()}
-              aria-label="Explore courses"
-            >
-              <Typewriter text={"Explore courses →"} speed={50} startDelay={3200} />
-            </motion.button>
-          </motion.div>
-        </Container>
+    <section id="home-section" className="hero-section" aria-label="Hero: Welcome">
+      {/* Background (Image or Video) */}
+      <div className="hero-bg">
+        <img
+          src={hero2}
+          alt="Students learning"
+        />
       </div>
+
+      <div className="hero-overlay" />
+
+      <Container className="hero-inner">
+        <Row className="align-items-center">
+          <Col lg={8} className="hero-content-wrapper">
+
+
+            {/* Headline */}
+            <motion.h1
+              className="hero-title"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="title-line">Welcome to the Place</span>
+              <span className="title-line">where <span className="title-highlight">Confidence Begins.</span></span>
+            </motion.h1>
+
+            {/* Subtitle */}
+            <motion.p
+              className="hero-sub"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              Master the art of communication with live mentor sessions, practical speaking practice, and a curriculum designed for real-world results.
+            </motion.p>
+
+            {/* Actions */}
+            <motion.div
+              className="hero-actions"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <button
+                className="btn-primary-hero"
+                onClick={() => navigate("/free-demo")}
+              >
+                <span>Enroll Now</span>
+                <FaArrowRight />
+              </button>
+
+              <button
+                className="btn-secondary-hero"
+                onClick={() => scrollToCourses()}
+              >
+                <div className="play-icon"><FaPlay size={10} /></div>
+                <span>Explore Courses</span>
+              </button>
+            </motion.div>
+
+
+          </Col>
+        </Row>
+
+
+      </Container>
     </section>
   );
 };

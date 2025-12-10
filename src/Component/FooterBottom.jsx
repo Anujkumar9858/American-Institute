@@ -11,68 +11,54 @@ export default function Footer() {
   };
 
   return (
-    <footer className="custom-footer">
-      <Container fluid="lg">
-        <Row>
-          {/* LEFT */}
-          <Col lg={4} className="footer-left">
+    <footer className="footer-premium">
+      <div className="footer-glow-top" />
+      <Container fluid className="px-lg-5">
+        <div className="footer-layout">
+          {/* Brand / Statement */}
+          <div className="footer-brand-section">
             <motion.h2
-              className="footer-title"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
+              className="footer-statement"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
             >
-              Because You <br /> Deserve to Be <br /> Heard.
+              Because You <br /> <span className="text-highlight">Deserve to Be Heard.</span>
             </motion.h2>
-          </Col>
+          </div>
 
-          {/* CENTER */}
-          <Col lg={4} className="footer-center">
-            <motion.div
-              className="footer-info"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
-            >
-              <h5>Address</h5>
-              <p>
-                Indrapuri B Sector, Sector B, Indrapuri, Bhopal, Madhya Pradesh 462022
-              </p>
-
-              <h5>Phone Number</h5>
-              <p>7723006091</p>
-
-              <h5>Email</h5>
-              <p>Americaninstitute@gmail.com</p>
-            </motion.div>
-          </Col>
-
-          {/* RIGHT */}
-          <Col lg={4} className="footer-right">
-            <motion.div
-              className="footer-social"
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={fadeUp}
-            >
-              <h5>Follow Us on</h5>
-              <div className="social-icons">
-                <a href="https://www.instagram.com/impsenglish?igsh=MWkzazgyNnpmejZ4Zg==">
-                  <FaInstagram />
-                </a>
-                <a href="https://www.youtube.com/@ImpressiveEnglish">
-                  <FaYoutube />
-                </a>
-                <a href="https://www.facebook.com/share/173ig1Ww91/">
-                  <FaFacebookF />
-                </a>
+          {/* Info Columns */}
+          <div className="footer-info-grid">
+            <div className="info-col">
+              <h6 className="footer-heading">Visit Us</h6>
+              <p className="footer-text">Indrapuri B Sector, Sector B<br />Bhopal, Madhya Pradesh 462022</p>
+            </div>
+            <div className="info-col">
+              <h6 className="footer-heading">Contact</h6>
+              <a href="tel:+917723006091" className="footer-link-text">+91 77230 06091</a>
+              <a href="mailto:Americaninstitute@gmail.com" className="footer-link-text">Americaninstitute@gmail.com</a>
+            </div>
+            <div className="info-col">
+              <h6 className="footer-heading">Follow Us</h6>
+              <div className="footer-social-links">
+                <motion.a whileHover={{ scale: 1.1 }} href="#"><FaInstagram /></motion.a>
+                <motion.a whileHover={{ scale: 1.1 }} href="#"><FaYoutube /></motion.a>
+                <motion.a whileHover={{ scale: 1.1 }} href="#"><FaFacebookF /></motion.a>
               </div>
-            </motion.div>
-          </Col>
-        </Row>
+            </div>
+          </div>
+        </div>
+
+        <div className="footer-divider" />
+
+        <div className="footer-bottom-bar">
+          <p className="copyright">&copy; {new Date().getFullYear()} American Institute. All Rights Reserved.</p>
+          <div className="footer-legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
       </Container>
     </footer>
   );

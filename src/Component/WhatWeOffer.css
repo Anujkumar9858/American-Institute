@@ -1,121 +1,350 @@
-/* ========== SECTION ========== */
+/* WhatWeOffer.css - Premium & Layout Redesign */
+
 .offer-section {
-  padding: 70px 0;
+  padding: 120px 0;
   background: #fff;
-}
-
-/* heading */
-.offer-top { margin-bottom: 26px; text-align: center; }
-.offer-title { font-size: 34px; font-weight: 800; }
-.offer-sub { color: #555; margin-top: 8px; font-size: 15px; }
-
-/* spacing */
-.offer-row { margin-top: 20px; }
-
-/* ========== CARDS (LEFT) ========== */
-.offer-card.small-card {
-  border-radius: 12px;
   overflow: hidden;
-  background: #f7f7f7;
-  box-shadow: 0 8px 24px rgba(12,18,30,0.06);
-  transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease;
-}
-.offer-card.small-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 40px rgba(12,18,30,0.12);
+  /* container clipping for animations */
 }
 
-.offer-img { position: relative; height: 160px; overflow: hidden; }
-.offer-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .75s cubic-bezier(.2,.9,.3,1); }
-.offer-img:hover img { transform: scale(1.06) translateY(-4px); }
+/* --- Header Section --- */
+.offer-header {
+  margin-bottom: 60px;
+  max-width: 700px;
+}
 
-.offer-badge {
+.offer-title {
+  font-family: "Outfit", sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+}
+
+.offer-subtitle {
+  font-family: "Outfit", sans-serif;
+  font-size: 20px;
+  color: #64748b;
+  font-weight: 400;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+/* --- Layout: Main Flex/Grid --- */
+.offer-layout {
+  display: grid;
+  grid-template-columns: 1.4fr 0.6fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* --- Course Cards (Premium) --- */
+.courses-grid {
+  display: grid;
+  gap: 32px;
+}
+
+.course-card-premium {
+  display: flex;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.course-card-premium:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(99, 102, 241, 0.2);
+}
+
+/* Image Side */
+.course-image-wrapper {
+  flex: 0 0 240px;
+  position: relative;
+  overflow: hidden;
+}
+
+.course-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.course-card-premium:hover .course-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.course-tag {
   position: absolute;
-  top: 12px;
-  right: 12px;
-  background: linear-gradient(90deg,#6d4ddf,#7ea1ff);
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 999px;
-  font-weight: 700;
+  top: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(4px);
+  padding: 6px 12px;
+  border-radius: 6px;
   font-size: 12px;
-  box-shadow: 0 10px 28px rgba(109,77,223,0.12);
+  font-weight: 700;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* body */
-.offer-body { padding: 14px; }
-.offer-body h5 { margin: 0 0 6px; font-size: 16px; font-weight: 700; }
-.offer-body p { margin: 0 0 10px; color: #444; font-size: 13px; line-height: 1.4; }
-.meta { list-style: none; padding: 0; margin: 0 0 12px; color: #666; font-size: 13px; }
-.meta li { margin-bottom: 6px; display: flex; gap: 6px; align-items: center; }
-
-/* actions */
-.offer-actions { display: flex; gap: 10px; }
-.enroll-btn {
-  background: linear-gradient(90deg,#6d4ddf,#7ea1ff);
-  color: #fff; border: none; padding: 8px 12px; border-radius: 8px;
-  font-weight: 700; cursor: pointer; transition: transform .15s ease, opacity .2s ease;
-}
-.enroll-btn:hover { transform: translateY(-3px); }
-.enroll-btn:disabled { background: #ccc; cursor: not-allowed; opacity: .7; }
-.details-btn {
-  background: #fff; border: 1px solid #e6e6e6; padding: 8px 12px; border-radius: 8px;
-  font-weight: 700; cursor: pointer;
-}
-.details-btn:hover { background: #f4f4f4; }
-
-/* ========== COUNTDOWN (RIGHT) ========== */
-.countdown-col {
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  margin-top: 18px;
-}
-.countdown {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 6px;
-}
-.count-item { text-align: center; }
-.count-box {
-  background: #000; color: #fff; padding: 12px 16px; border-radius: 10px;
-  min-width: 64px; display: inline-flex; align-items: center; justify-content: center;
-  font-weight: 800; box-shadow: 0 8px 30px rgba(0,0,0,0.18);
-}
-.count-num { font-size: 22px; display: inline-block; }
-.count-label { font-size: 12px; color: #666; margin-top: 6px; }
-.batch-finished { color: #d23; margin-top: 12px; font-weight: 700; font-size: 14px; }
-
-/* ========== RESPONSIVE ========== */
-@media (max-width: 992px) {
-  .countdown { gap: 8px; }
-  .count-box { min-width: 54px; padding: 10px 12px; }
-  .count-num { font-size: 20px; }
-  .offer-row { gap: 18px; }
-}
-@media (max-width: 576px) {
-  .offer-title { font-size: 26px; }
-  .offer-img { height: 140px; }
-  .count-box { min-width: 50px; padding: 8px 10px; }
+/* Content Side */
+.course-content {
+  flex: 1;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Modal styling */
-.details-modal {
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.course-header h3 {
+  font-family: "Outfit", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.course-price {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #4f46e5;
+}
+
+.course-desc {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* Meta Grid */
+.course-meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.meta-val {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+/* Actions */
+.course-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.btn-enroll-premium {
+  flex: 1;
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-enroll-premium:hover {
+  background: #334155;
+  transform: translateY(-2px);
+}
+
+.btn-enroll-premium:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-details-premium {
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  color: #0f172a;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.btn-details-premium:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* --- Sidebar (Countdown) --- */
+.offer-sidebar {
+  position: relative;
+}
+
+.countdown-panel {
+  background: radial-gradient(circle at top right, #4f46e5, #4338ca);
+  border-radius: 24px;
+  padding: 32px;
+  color: #fff;
+  box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.4);
+  position: sticky;
+  top: 100px;
+  /* sticky behavior */
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.panel-header h4 {
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.pulsing-dot {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  animation: pulse-white 2s infinite;
+}
+
+@keyframes pulse-white {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+  }
+}
+
+/* Timer Grid */
+.timer-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.time-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.unit-val {
+  font-family: "Outfit", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.unit-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.time-sep {
+  font-size: 24px;
+  font-weight: 300;
+  opacity: 0.4;
+  margin-top: -16px;
+}
+
+.panel-footer {
   text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 20px;
 }
-.details-img img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 12px;
-  margin-bottom: 20px;
+
+.panel-footer p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.8;
+  font-style: italic;
 }
-.details-text h3 { font-weight: 700; margin-bottom: 10px; }
-.details-text ul {
-  list-style: none; padding: 0; margin: 15px 0; text-align: left;
+
+.timer-finished {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 20px 0;
 }
-.details-text ul li { margin-bottom: 8px; font-size: 14px; }
-@media (min-width: 768px) {
-  .details-modal { flex-direction: row; gap: 24px; text-align: left; }
-  .details-img { flex: 1; }
-  .details-text { flex: 2; }
+
+/* --- Responsive --- */
+@media (max-width: 992px) {
+  .offer-layout {
+    grid-template-columns: 1fr;
+    /* stack vertical */
+  }
+
+  .countdown-panel {
+    top: 0;
+    margin-top: 40px;
+  }
+
+  .course-card-premium {
+    flex-direction: column;
+    /* stack image on top */
+  }
+
+  .course-image-wrapper {
+    flex: 0 0 200px;
+  }
+}
+
+/* Modal tweaks (retained) */
+.details-modal {
+  padding: 20px;
 }

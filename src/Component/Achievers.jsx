@@ -195,16 +195,15 @@ export default function AchieversAnimated({ items = SAMPLE }) {
                 className="ach-card"
                 key={origIndex}
                 variants={itemVariants}
-                whileHover={{ y: -8, scale: 1.02 }}
+                whileHover={{ y: -8 }}
               >
                 <div className="ach-media">
                   <img src={a.img} alt={a.name} loading="lazy" />
+                  <div className="ach-overlay"></div>
                 </div>
-                <div className="ach-chip">
-                  <div className="chip-inner">
-                    <div className="chip-name">{a.name}</div>
-                    <div className="chip-role">{a.role}</div>
-                  </div>
+                <div className="ach-content">
+                  <div className="ach-name">{a.name}</div>
+                  <div className="ach-role">{a.role}</div>
                 </div>
               </motion.div>
             );

@@ -10,21 +10,21 @@ import "./WhyChooseUs.css";
 export default function WhyChooseUs() {
   const cards = [
     {
-      title: "On stage practice",
-      desc: "Helps students build confidence and be fluent in communication",
-      color: "#0d1b8c",
+      title: "On-Stage Confidence",
+      desc: "Master the art of public speaking with live on-stage practice sessions that build ironclad confidence.",
+      color: "#4f46e5", // Indigo
       img: Stage_practice,
     },
     {
-      title: "Group Discussion",
-      desc: "Here students learn to communicate and share their views on any topic.",
-      color: "#aef1d1",
+      title: "Group Discussions",
+      desc: "Learn to articulate your ideas effectively and lead conversations in dynamic group settings.",
+      color: "#0ea5e9", // Sky Blue
       img: Group_discussion,
     },
     {
-      title: "Corporate Interview practices",
-      desc: "Helps in future ready for company.",
-      color: "#8fb3ff",
+      title: "Interview Mastery",
+      desc: "Prepare for your dream career with rigorous corporate interview simulations and feedback.",
+      color: "#f59e0b", // Amber
       img: Interview_practice,
     },
   ];
@@ -67,48 +67,59 @@ export default function WhyChooseUs() {
     <section className="choose-section">
       <Container>
         {/* Heading */}
-        <motion.h2
-          className="choose-title text-center"
-          initial={{ opacity: 0, y: -30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          Why Choose us
-        </motion.h2>
+        <div className="section-header text-center mb-5">
+          <motion.h2
+            className="choose-title"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            Why Choose Us
+          </motion.h2>
 
-        <motion.p
-          className="choose-subtitle text-center typed-subtitle"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {typed}
-          <span className="typed-cursor" />
-        </motion.p>
+          <motion.p
+            className="choose-subtitle typed-subtitle"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, amount: 0.3 }}
+          >
+            {typed}
+            <span className="typed-cursor" />
+          </motion.p>
+        </div>
 
         {/* Cards */}
-        <Row className="mt-5 gx-4 gy-4">
+        <Row className="g-4 justify-content-center">
           {cards.map((card, idx) => (
-            <Col md={4} key={idx} className="d-flex justify-content-center">
+            <Col lg={4} md={6} key={idx}>
               <motion.div
                 className="choose-card"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: idx * 0.3 }}
-                viewport={{ once: true, amount: 0.4 }}
-                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5, delay: idx * 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ y: -10 }}
               >
-                {/* top content */}
-                <div className="card-top" style={{ background: card.color }}>
-                  <h4>{card.title}</h4>
-                  <p>{card.desc}</p>
-                  <FaArrowRight className="arrow-icon" />
-                </div>
-                {/* bottom image */}
-                <div className="card-bottom">
+                {/* Image Section (Top) */}
+                <div className="card-image-wrap">
                   <img src={card.img} alt={card.title} />
+                  <div className="card-overlay" style={{ background: `linear-gradient(to top, max(rgba(255,255,255,0.9), ${card.color}20), transparent)` }}></div>
+                </div>
+
+                {/* Content Section (Bottom) */}
+                <div className="card-content">
+                  <div className="content-top">
+                    <div className="card-icon-box" style={{ color: card.color, background: `${card.color}15` }}>
+                      <FaArrowRight />
+                    </div>
+                  </div>
+
+                  <h4 className="card-title">{card.title}</h4>
+                  <p className="card-desc">{card.desc}</p>
+
+                  <div className="card-footer-line" style={{ background: card.color }}></div>
                 </div>
               </motion.div>
             </Col>

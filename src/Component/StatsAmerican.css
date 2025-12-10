@@ -45,7 +45,7 @@
   font-weight: 700;
   margin-left: 4px;
   font-size: 0.82em;
-  color: rgba(0,0,0,0.6);
+  color: rgba(0, 0, 0, 0.6);
   -webkit-text-fill-color: initial;
   text-shadow: none;
 }
@@ -55,7 +55,8 @@
   margin: 0;
   font-size: 15px;
   color: #555;
-  min-height: 42px; /* reserve space so layout doesn't jump while typing */
+  min-height: 42px;
+  /* reserve space so layout doesn't jump while typing */
   display: inline-block;
   line-height: 1.3;
   padding: 0 8px;
@@ -92,25 +93,54 @@
 
 /* Cursor blink keyframes */
 @keyframes stat-tw-blink {
-  0% { opacity: 1; }
-  50% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 /* Respect reduced motion: show full text and disable cursor */
 @media (prefers-reduced-motion: reduce) {
-  .stat-typewriter-cursor { animation: none; opacity: 0; }
-  .stat-typewriter { white-space: normal; }
+  .stat-typewriter-cursor {
+    animation: none;
+    opacity: 0;
+  }
+
+  .stat-typewriter {
+    white-space: normal;
+  }
 }
 
 /* Responsive adjustments to keep cards tidy */
 @media (max-width: 992px) {
-  .stat-number { font-size: 32px; }
-  .stat-card { min-height: 120px; }
+  .stat-number {
+    font-size: 32px;
+  }
+
+  .stat-card {
+    min-height: 120px;
+  }
 }
 
 @media (max-width: 576px) {
-  .stat-number { font-size: 28px; }
-  .stat-text { font-size: 14px; min-height: 48px; }
-  .stat-card { padding: 18px; min-height: auto; }
+  .stat-number {
+    font-size: 28px;
+  }
+
+  .stat-text {
+    font-size: 14px;
+    min-height: 48px;
+  }
+
+  .stat-card {
+    padding: 18px;
+    min-height: auto;
+  }
 }

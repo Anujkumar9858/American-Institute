@@ -1,146 +1,166 @@
-/* FooterBottom.css (replace your old file with this) */
+/* FooterBottom.css - Premium Post-Footer */
 
-.custom-footer {
-  background: #000;
+.footer-premium {
+  background: #020617;
   color: #fff;
-  padding: 60px 0;
+  padding: 80px 0 24px;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Make the footer area a little taller on desktop for nicer vertical centering */
-@media (min-width: 992px) {
-  .custom-footer .container,
-  .custom-footer .container-fluid {
-    height: 220px; /* tweak if you want more/less spacing */
-  }
+.footer-glow-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.4), transparent);
 }
 
-/* Column wrappers: use flex for vertical centering on desktop */
-.footer-left,
-.footer-center,
-.footer-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* vertical center inside column */
-  height: 100%;
+.footer-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 2fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: start;
 }
 
-/* Desktop alignment: left / center / right */
-@media (min-width: 992px) {
-  .footer-left {
-    align-items: flex-start; /* heading left */
-    padding-left: 12px;
-  }
-
-  .footer-center {
-    align-items: center; /* center column horizontally centered in its grid cell */
-  }
-
-  .footer-center .footer-info {
-    text-align: left;      /* but content inside stays left-aligned like in the image */
-    max-width: 320px;      /* restrict width so lines break nicely */
-    width: 100%;
-  }
-
-  .footer-right {
-    align-items: flex-end; /* social icons on the right */
-    padding-right: 18px;
-  }
+/* Brand Statement */
+.footer-statement {
+  font-family: "Outfit", sans-serif;
+  font-size: 56px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
 }
 
-/* Title styling */
-.footer-title {
-  font-size: 40px; /* larger on desktop to match image */
+.footer-statement .text-highlight {
+  color: #94a3b8;
+  font-weight: 600;
+}
+
+/* Info Grid */
+.footer-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.footer-heading {
+  font-family: "Outfit", sans-serif;
+  font-size: 13px;
+  color: #6366f1;
   font-weight: 700;
-  line-height: 1.15;
-  margin-bottom: 0;
-  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
 }
 
-/* Make title smaller on mobile */
-@media (max-width: 991px) {
-  .footer-title {
-    font-size: 26px;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-}
-
-/* Info & headings */
-.footer-info h5,
-.footer-social h5 {
+.footer-text {
+  font-family: "Outfit", sans-serif;
   font-size: 15px;
-  font-weight: 700;
+  line-height: 1.6;
+  color: #cbd5e1;
+}
+
+.footer-link-text {
+  display: block;
+  font-family: "Outfit", sans-serif;
+  font-size: 15px;
+  color: #cbd5e1;
+  text-decoration: none;
   margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+
+.footer-link-text:hover {
   color: #fff;
-  margin-right: 227px;
 }
 
-.footer-info p {
-  font-size: 14px;
-  margin-bottom: 12px;
-  color: #ccc;
-  line-height: 1.4;
-}
-
-/* Social icons block */
-.footer-social {
+/* Socials */
+.footer-social-links {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 16px;
 }
 
-.footer-social .social-icons {
+.footer-social-links a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
   display: flex;
-  gap: 12px;
-  margin-top: 12px;
-  margin-right: 200px;
-}
-
-.footer-social .social-icons a {
-  color: #fff;
-  font-size: 18px;
-  width: 34px;
-  height: 34px;
-  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: transparent;
-  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
-  box-shadow: none;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
 }
 
-.footer-social .social-icons a:hover {
-  color: white;
+.footer-social-links a:hover {
+  background: #6366f1;
   transform: translateY(-4px);
-  background: rgba(109, 77, 223, 0.12); /* subtle theme accent */
 }
 
-/* Make sure right-column items truly right on desktop */
-@media (min-width: 992px) {
-  .footer-right .footer-social {
-    align-items: flex-end;
-    text-align: right;
+/* Divider & Bottom Bar */
+.footer-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 32px;
+}
+
+.footer-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: #64748b;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 24px;
+}
+
+.footer-legal a {
+  color: #64748b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-legal a:hover {
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .footer-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
   }
 
-  .footer-right .social-icons {
-    justify-content: flex-end;
+  .footer-statement {
+    font-size: 42px;
+  }
+
+  .footer-info-grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* Responsive: stack nicely for small screens */
-@media (max-width: 991px) {
-  .footer-left,
-  .footer-center,
-  .footer-right {
-    align-items: flex-start;
-    padding: 0 12px;
+@media (max-width: 576px) {
+  .footer-statement {
+    font-size: 32px;
   }
-  .footer-center .footer-info {
-    max-width: 100%;
+
+  .footer-info-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
   }
-  .footer-right .footer-social {
+
+  .footer-bottom-bar {
+    flex-direction: column;
+    gap: 16px;
     align-items: flex-start;
-    margin-top: 12px;
   }
 }

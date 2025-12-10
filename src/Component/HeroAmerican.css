@@ -1,111 +1,274 @@
-/* HeroAmerican.css - responsive, animated hero */
+/* HeroAmerican.css - Premium Cinematic Hero */
 
 .hero-section {
-  background-image: url("./Image/Hero2.jpg");
-  background-position: center;
-  background-size: cover;
-  height: 85vh;
-  min-height: 560px;
-  position: relative;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  overflow: hidden;
-  display: flex;
-  /* margin-top: 20px; */
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: #0f172a;
+    /* Dark base */
 }
 
-/* semi-transparent overlay so text is readable */
-.hero-section .overlay {
-  background: linear-gradient(180deg, rgba(6,7,11,0.45) 0%, rgba(6,7,11,0.35) 40%, rgba(6,7,11,0.28) 100%);
-  width: 100%;
-  padding: 48px 12px;
-  display: flex;
-  align-items: center;
-  box-sizing: border-box;
+/* Background Video/Image Container */
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
 }
 
-/* center-left layout on wide screens, centered on small screens */
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    /* Dim the image */
+    transform: scale(1.05);
+    /* Slight zoom for depth */
+}
+
+/* Gradient Overlay for Text Readability */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to right,
+            rgba(15, 23, 42, 0.95) 0%,
+            rgba(15, 23, 42, 0.8) 40%,
+            rgba(15, 23, 42, 0.4) 100%);
+    z-index: 1;
+}
+
+/* Content */
 .hero-inner {
-  max-width: 1180px;
-  width: 100%;
-  padding-left: clamp(18px, 6vw, 48px);
-  padding-right: clamp(18px, 4vw, 48px);
+    position: relative;
+    z-index: 2;
+    width: 100%;
 }
 
-/* main heading: responsive size with clamp */
+.hero-content-wrapper {
+    max-width: 800px;
+}
+
+/* Badge */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 8px 16px;
+    border-radius: 99px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(4px);
+}
+
+.badge-text {
+    font-family: "Outfit", sans-serif;
+    font-size: 14px;
+    color: #a5b4fc;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-dot {
+    width: 6px;
+    height: 6px;
+    background: #22c55e;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #22c55e;
+}
+
+/* Dynamic Headline */
 .hero-title {
-  margin: 0;
-  font-weight: 800;
-  color: #fff;
-  line-height: 1.02;
-  font-size: clamp(28px, 5.2vw, 56px); /* scales between mobile and desktop */
-  letter-spacing: -0.6px;
-  text-shadow: 0 6px 30px rgba(3,6,23,0.45);
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(48px, 5vw, 80px);
+    /* Massive, responsive font */
+    font-weight: 800;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
 }
 
-/* highlighted word style */
-.hero-title .highlight {
-  color: #6d4ddf;
-  background: linear-gradient(90deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-  padding: 4px 8px;
-  border-radius: 8px;
-  display: inline-block;
+.title-line {
+    display: block;
 }
 
-/* small subtitle */
+.title-highlight {
+    background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+}
+
+/* Subtitle */
 .hero-sub {
-  margin: 8px 0 0;
-  font-size: clamp(14px, 1.6vw, 18px);
-  color: rgba(255,255,255,0.95);
-  max-width: 720px;
-  opacity: 0.95;
+    font-family: "Outfit", sans-serif;
+    font-size: clamp(18px, 1.5vw, 22px);
+    color: #cbd5e1;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 40px;
+    font-weight: 400;
 }
 
-/* CTA area */
-.hero-cta { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
-
-.hero-enroll {
-  background: linear-gradient(90deg, #6d4ddf, #7ea1ff);
-  border: none;
-  box-shadow: 0 12px 38px rgba(109,77,223,0.18);
-  font-weight: 800;
-  font-size: 16px;
-  padding: 12px 26px;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
+/* Actions */
+.hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-/* secondary link button */
-.hero-secondary {
-  color: rgba(255,255,255,0.88);
-  text-decoration: none;
-  font-weight: 700;
-  border: none;
-  background: transparent;
-  padding: 8px 10px;
+.btn-primary-hero {
+    background: #fff;
+    color: #0f172a;
+    padding: 16px 36px;
+    border-radius: 99px;
+    border: none;
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-/* small polish */
-.hero-enroll:focus, .hero-secondary:focus { outline: none; box-shadow: 0 0 0 6px rgba(109,77,223,0.08); }
+.btn-primary-hero:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px -5px rgba(255, 255, 255, 0.3);
+}
 
-/* responsive tweaks */
+.btn-secondary-hero {
+    background: transparent;
+    color: #fff;
+    padding: 16px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 99px;
+    font-family: "Outfit", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(4px);
+}
+
+.btn-secondary-hero:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fff;
+}
+
+.play-icon {
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    color: #0f172a;
+    border-radius: 50%;
+}
+
+/* Stats Row */
+.hero-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 32px;
+}
+
+.stat-item h4 {
+    font-family: "Outfit", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+}
+
+.stat-item p {
+    font-family: "Outfit", sans-serif;
+    font-size: 14px;
+    color: #94a3b8;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Floating Elements (Decorative) */
+.floating-card {
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 280px;
+}
+
+.card-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.card-content h5 {
+    color: #fff;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 600;
+    font-family: "Outfit", sans-serif;
+}
+
+.card-content span {
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
 @media (max-width: 992px) {
-  .hero-section { height: 78vh; min-height: 520px; }
-  .hero-inner { padding-left: 20px; padding-right: 20px; }
-  .hero-cta { flex-direction: row; }
-}
+    .hero-section {
+        padding-top: 100px;
+        /* Navbar offset */
+        align-items: flex-start;
+    }
 
-@media (max-width: 576px) {
-  .hero-section { height: 72vh; min-height: 460px; }
-  .hero-title { font-size: clamp(22px, 8.8vw, 34px); text-align: left; }
-  .hero-inner { padding-left: 16px; padding-right: 16px; }
-  .hero-cta { flex-direction: column; align-items: flex-start; gap: 10px; margin-top: 14px; }
-  .hero-enroll { width: auto; font-size: 15px; padding: 10px 18px; }
-  .hero-sub { font-size: 14px; }
-}
+    .hero-overlay {
+        background: linear-gradient(180deg, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.95) 100%);
+    }
 
-/* accessibility: make sure text contrast is strong */
-@media (prefers-reduced-motion: reduce) {
-  .hero-title, .hero-sub, .hero-enroll, .hero-secondary { transition: none !important; animation: none !important; }
+    .hero-title {
+        font-size: 42px;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .floating-card {
+        display: none;
+        /* Hide decorative elements on mobile */
+    }
 }

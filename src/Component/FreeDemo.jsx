@@ -79,64 +79,108 @@ export default function FreeDemo() {
   const frameVar = { hidden: { opacity: 0, scale: 0.98, y: 10 }, show: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6 } } };
 
   return (
-    <section className="free-demo-animated">
-      <Container>
-        <motion.div className="demo-wrap" variants={container} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.45 }}>
-          <Row className="align-items-center">
-            {/* LEFT */}
-            <Col md={6} className="demo-left">
-              <motion.h2 className="demo-heading" variants={headingVar}>
-                Try Before You Decide.
-                <br />
-                <motion.span className="demo-subtitle" variants={subVar}>
-                  {/* typed subtitle */}
-                  <span aria-live="polite" className="typed-inline">
+    <section className="free-demo-premium">
+      <Container fluid className="p-0">
+        <div className="premium-demo-layout">
+          {/* Left Content Side */}
+          <div className="demo-content-side">
+            <Container>
+              <div className="content-wrapper">
+                <motion.div
+                  className="demo-badge"
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <span className="badge-dot"></span> Free Access
+                </motion.div>
+
+                <motion.h2
+                  className="premium-heading"
+                  variants={headingVar}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true }}
+                >
+                  Experience the Difference <br />
+                  <span className="highlight-text">Before You Commit.</span>
+                </motion.h2>
+
+                <motion.div
+                  className="premium-typed-wrapper"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <span aria-live="polite" className="typed-text">
                     {typed}
-                    <span className="typed-cursor" aria-hidden="true" />
+                    <span className="cursor-blink" aria-hidden="true" />
                   </span>
-                </motion.span>
-              </motion.h2>
+                </motion.div>
 
-              <motion.p className="demo-desc" variants={subVar}>
-                Join a free live demo to experience our teaching style, meet the mentor, and ask questions live.
-              </motion.p>
+                <motion.p
+                  className="premium-desc"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                >
+                  Join a live session, interact with expert mentors, and see exactly how we transform your communication skills — all for free.
+                </motion.p>
 
-              <motion.button
-                className="demo-btn"
-                variants={btnVar}
-                whileHover={{ y: -4, boxShadow: "0 18px 40px rgba(109,77,223,0.18)" }}
-                onClick={() => navigate("/free-demo")}
-                aria-label="Get a free demo"
-              >
-                <span>Get a Free Demo</span>
-                <FaExternalLinkAlt className="btn-icon" />
-              </motion.button>
-            </Col>
+                <motion.button
+                  className="premium-btn"
+                  variants={btnVar}
+                  initial="hidden"
+                  whileInView="show"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => navigate("/free-demo")}
+                >
+                  <span className="btn-text">Book Your Free Session</span>
+                  <div className="icon-circle">
+                    <FaExternalLinkAlt />
+                  </div>
+                </motion.button>
 
-            {/* RIGHT */}
-            <Col md={6} className="demo-right">
-              <motion.div
-                className="video-frame"
-                variants={frameVar}
-                whileHover={{ y: -6 }}
-                onClick={() => navigate("/free-demo")}
-                role="button"
-                tabIndex={0}
-                aria-label="Open free demo page"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?auto=format&fit=crop&w=1200&q=80"
-                  alt="Demo preview"
-                />
-                <div className="play-overlay">
-                  <motion.div className="play-circle" initial={{ scale: 1 }} animate={{ scale: [1, 1.06, 1] }} transition={{ repeat: Infinity, duration: 2.6 }}>
-                    <FaPlay />
-                  </motion.div>
+                <div className="trust-indicators">
+                  <div className="Avatar-stack">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User" />
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="User" />
+                    <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="User" />
+                  </div>
+                  <p>Join <strong>500+</strong> students this month</p>
                 </div>
-              </motion.div>
-            </Col>
-          </Row>
-        </motion.div>
+              </div>
+            </Container>
+          </div>
+
+          {/* Right Visual Side */}
+          <div className="demo-visual-side">
+            <div className="visual-background"></div>
+            <motion.div
+              className="video-card-floating"
+              variants={frameVar}
+              initial="hidden"
+              whileInView="show"
+              whileHover={{ y: -10, rotate: -1 }}
+              viewport={{ once: true }}
+              onClick={() => navigate("/free-demo")}
+            >
+              <div className="card-glass-shine"></div>
+              <img
+                src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80"
+                alt="Classroom Interaction"
+              />
+              <div className="play-button-wrapper">
+                <div className="play-backdrop"></div>
+                <FaPlay className="play-icon" />
+              </div>
+              <div className="live-indicator">
+                <span className="indicator-dot"></span> Live Now
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </Container>
     </section>
   );

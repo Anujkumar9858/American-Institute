@@ -54,7 +54,7 @@ export default function NavbarAmerican() {
       expand="lg"
       expanded={expanded}
       collapseOnSelect
-      className={`animated-navbar ${scrolled ? "scrolled" : "top"} ${!isHomePage ? "force-dark" : ""}`} 
+      className={`animated-navbar ${scrolled ? "scrolled" : "top"} ${!isHomePage ? "force-dark" : ""}`}
       fixed="top"
       ref={navRef}
     >
@@ -109,14 +109,14 @@ export default function NavbarAmerican() {
                 {/* ✅ Login / Logout toggle */}
                 {role ? (
                   <Nav.Link as="button" className="user-link" onClick={logout}>
-                    <motion.div whileHover={{ scale: 1.2 }} transition={{ duration: 0.3 }}>
-                      <FaSignOutAlt size={22} />
+                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                      <FaSignOutAlt size={24} />
                     </motion.div>
                   </Nav.Link>
                 ) : (
                   <Nav.Link as={RouterLink} to="/login" className="user-link" onClick={() => setExpanded(false)}>
-                    <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 0.6 }}>
-                      <FaUserCircle size={22} />
+                    <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.2 }}>
+                      <FaUserCircle size={24} />
                     </motion.div>
                   </Nav.Link>
                 )}

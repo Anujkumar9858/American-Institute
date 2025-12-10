@@ -92,119 +92,136 @@ export default function WhatWeOffer() {
 
   return (
     <section id="courses-section" className="offer-section">
+
       <Container>
-        <div className="offer-top text-center">
+        <div className="offer-header">
           <motion.h2
             className="offer-title"
-            initial={{ y: -18, opacity: 0 }}
+            initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
           >
-            What We Offer
+            Master Business English.
           </motion.h2>
+          <motion.p
+            className="offer-subtitle"
+            initial={{ y: 20, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            viewport={{ once: true }}
+          >
+            Choose your path to professional fluency with our specialized courses.
+          </motion.p>
         </div>
 
-        <Row className="align-items-center offer-row">
-          <Col md={8}>
-            <Row className="g-4">
-              {courses.map((c, i) => (
-                <Col md={6} key={c.id}>
-                  <motion.div
-                    className="offer-card small-card"
-                    initial={{ opacity: 0, y: 24 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: i * 0.08 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    whileHover={{ translateY: -6, scale: 1.01 }}
-                  >
-                    <div className="offer-img">
-                      <img src={c.img} alt={c.title} />
-                      <span className="offer-badge">
-                        {c.id === "offline" ? "Offline" : "Online"}
-                      </span>
-                    </div>
-
-                    <div className="offer-body">
-                      <h5>{c.title}</h5>
-                      <p>{c.desc}</p>
-                      <ul className="meta">
-                        <li>{c.duration}</li>
-                        <li>{c.batch}</li>
-                        <li>{c.price}</li>
-                      </ul>
-                      <div className="offer-actions">
-                        <button
-                          className="enroll-btn"
-                          onClick={() => navigate("/enroll")}
-                          disabled={finished}
-                        >
-                          {finished ? "Enrollment Closed" : "Enroll Now"}
-                        </button>
-                        <button
-                          className="details-btn"
-                          onClick={() => {
-                            setSelectedCourse(c);
-                            setShowDetails(true);
-                          }}
-                        >
-                          Details
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-
-          <Col md={4} className="text-center countdown-col">
-            <motion.h4
-              initial={{ x: 40, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true, amount: 0.4 }}
-            >
-              Next batch <br /> Starting Soon
-            </motion.h4>
-            {!finished ? (
-              <div className="countdown" role="timer" aria-live="polite">
-                <div className="count-item">
-                  <div className="count-box">
-                    <AnimatedNumber value={timeLeft.days} />
-                  </div>
-                  <div className="count-label">Days</div>
-                </div>
-                <div className="count-item">
-                  <div className="count-box">
-                    <AnimatedNumber value={timeLeft.hours} />
-                  </div>
-                  <div className="count-label">Hours</div>
-                </div>
-                <div className="count-item">
-                  <div className="count-box">
-                    <AnimatedNumber value={timeLeft.mins} />
-                  </div>
-                  <div className="count-label">Mins</div>
-                </div>
-                <div className="count-item">
-                  <div className="count-box">
-                    <AnimatedNumber value={timeLeft.secs} />
-                  </div>
-                  <div className="count-label">Secs</div>
-                </div>
-              </div>
-            ) : (
-              <motion.p
-                className="batch-finished"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
+        <div className="offer-layout">
+          {/* Main Content: Course Cards */}
+          <div className="courses-grid">
+            {courses.map((c, i) => (
+              <motion.div
+                className="course-card-premium"
+                key={c.id}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: i * 0.15, ease: [0.22, 1, 0.36, 1] }}
+                viewport={{ once: true, amount: 0.2 }}
               >
-                ⏳ Batch Started / Enrollment Closed
-              </motion.p>
-            )}
-          </Col>
-        </Row>
+                <div className="course-image-wrapper">
+                  <img src={c.img} alt={c.title} />
+                  <div className="course-tag">{c.id === "offline" ? "In-Person Class" : "Live Online Class"}</div>
+                </div>
+
+                <div className="course-content">
+                  <div className="course-header">
+                    <h3>{c.title}</h3>
+                    <div className="course-price">{c.price}</div>
+                  </div>
+
+                  <p className="course-desc">{c.desc}</p>
+
+                  <div className="course-meta-grid">
+                    <div className="meta-item">
+                      <span className="meta-label">Duration</span>
+                      <span className="meta-val">{c.duration}</span>
+                    </div>
+                    <div className="meta-item">
+                      <span className="meta-label">Batch</span>
+                      <span className="meta-val">{c.batch}</span>
+                    </div>
+                  </div>
+
+                  <div className="course-actions">
+                    <button
+                      className="btn-enroll-premium"
+                      onClick={() => navigate("/enroll")}
+                      disabled={finished}
+                    >
+                      {finished ? "Closed" : "Secure Your Seat"}
+                    </button>
+                    <button
+                      className="btn-details-premium"
+                      onClick={() => {
+                        setSelectedCourse(c);
+                        setShowDetails(true);
+                      }}
+                    >
+                      View Syllabus
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Sidebar: Countdown & urgency */}
+          <div className="offer-sidebar">
+            <motion.div
+              className="countdown-panel"
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+            >
+              <div className="panel-header">
+                <h4>Next Batch Starts In</h4>
+                <div className="pulsing-dot"></div>
+              </div>
+
+              {!finished ? (
+                <div className="timer-grid">
+                  <div className="time-unit">
+                    <span className="unit-val"><AnimatedNumber value={timeLeft.days} /></span>
+                    <span className="unit-label">Days</span>
+                  </div>
+                  <div className="time-sep">:</div>
+                  <div className="time-unit">
+                    <span className="unit-val"><AnimatedNumber value={timeLeft.hours} /></span>
+                    <span className="unit-label">Hours</span>
+                  </div>
+                  <div className="time-sep">:</div>
+                  <div className="time-unit">
+                    <span className="unit-val"><AnimatedNumber value={timeLeft.mins} /></span>
+                    <span className="unit-label">Mins</span>
+                  </div>
+                  <div className="time-sep">:</div>
+                  <div className="time-unit">
+                    <span className="unit-val"><AnimatedNumber value={timeLeft.secs} /></span>
+                    <span className="unit-label">Secs</span>
+                  </div>
+                </div>
+              ) : (
+                <div className="timer-finished">
+                  Enrollment Closed
+                </div>
+              )}
+
+              <div className="panel-footer">
+                <p>Limited seats available for the upcoming intake.</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </Container>
 
       {/* ✅ Details Modal */}

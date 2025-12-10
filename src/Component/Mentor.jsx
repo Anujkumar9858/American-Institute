@@ -78,70 +78,81 @@ export default function Mentor() {
 
   return (
     <section
-      className={`mentor-section ${inView ? "in-view" : ""}`}
+      className={`mentor-premium-section`}
       ref={containerRef}
       aria-label="Meet our Mentor"
     >
+      <div className="section-bg-pattern" />
       <Container>
-        <Row className="align-items-center">
-          <Col lg={6} className="mentor-text pe-lg-5">
-            <h2 className={`section-subtitle ${inView ? "reveal-title" : ""}`}>
-              Meet our Mentor
-            </h2>
+        <Row className="align-items-center flex-lg-row-reverse">
+          {/* Image Side (Right on Desktop) */}
+          <Col lg={6} className="position-relative mb-5 mb-lg-0">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              viewport={{ once: true }}
+              className="mentor-image-wrapper"
+            >
+              <div className="image-frame-back" />
+              <img src={mentor.img} alt={mentor.name} className="mentor-premium-img" />
 
-            <h3 className={`mentor-name ${inView ? "reveal-name" : ""}`}>
-              {mentor.name} Sir
-            </h3>
-
-            {/* Typed tagline */}
-            <div className={`mentor-typed-wrap ${inView ? "reveal-typed" : ""}`}>
-              <span className="mentor-typed" aria-live="polite">
-                {typed}
-                <span className="typed-cursor" aria-hidden="true" />
-              </span>
-            </div>
-
-            <div className="mentor-lines">
-              {mentor.lines.map((line, idx) => (
-                <p
-                  key={idx}
-                  className="mentor-desc reveal-line"
-                  style={{ transitionDelay: `${idx * 150}ms` }}
-                >
-                  {line}
-                </p>
-              ))}
-            </div>
+              {/* Floating Social Badge */}
+              <motion.div
+                className="social-floating-badge"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.6 }}
+              >
+                <div className="badge-icon">
+                  <span className="pulse-dot"></span>
+                </div>
+                <div className="badge-info">
+                  <span className="badge-count">1.5M+</span>
+                  <span className="badge-label">Community Strong</span>
+                </div>
+              </motion.div>
+            </motion.div>
           </Col>
 
-          <Col lg={6} className="text-lg-end mt-4 mt-lg-0">
+          {/* Text Side (Left on Desktop) */}
+          <Col lg={6} className="mentor-content-side">
             <motion.div
-              initial={{ opacity: 0, x: 40, scale: 0.98 }}
-              animate={inView ? { opacity: 1, x: 0, scale: 1 } : {}}
-              transition={{ duration: 0.7, ease: [0.2, 0.9, 0.3, 1] }}
-              className={`mentor-card`}
-              whileHover={{ y: -8, scale: 1.02 }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              <img src={mentor.img} alt={mentor.name} className="mentor-img" />
-              <div className="mentor-glow-ornament" aria-hidden="true" />
-            </motion.div>
+              <div className="eyebrow-text">The Visionary</div>
+              <h2 className="mentor-premium-name">
+                {mentor.name} <span className="text-highlight">Sir</span>
+              </h2>
 
-            <div className={`d-inline-block ms-lg-4 mt-3 mt-lg-0 ${inView ? "reveal-button" : ""}`}>
-              {/* Use Link for navigation so it's less likely to be blocked by event handlers */}
-              <motion.div whileTap={{ scale: 0.98 }}>
+              <div className="mentor-premium-role">
+                <span className="role-line"></span>
+                <span className="role-text">{mentor.taglines[0]}</span>
+              </div>
+
+              <div className="mentor-premium-desc">
+                {mentor.lines.map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+              </div>
+
+              <div className="action-wrapper">
                 <Link
                   to={`/mentor/${mentor.slug}`}
-                  className="know-btn d-inline-flex align-items-center text-decoration-none"
-                  aria-label={`Know more about ${mentor.name}`}
-                  onClick={() => console.log("navigating to:", `/mentor/${mentor.slug}`)}
+                  className="premium-know-btn"
                 >
-                  <span>Know More</span>
-                  <span className="k-icon ms-2">
-                    <FaArrowRight />
-                  </span>
+                  <span className="btn-text">Read Full Story</span>
+                  <span className="btn-icon"><FaArrowRight /></span>
                 </Link>
-              </motion.div>
-            </div>
+
+                <div className="signature-block">
+                  <span className="signature-text">Sameer.</span>
+                </div>
+              </div>
+            </motion.div>
           </Col>
         </Row>
       </Container>

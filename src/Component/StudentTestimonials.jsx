@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { motion } from "framer-motion";
-import { FaArrowRight } from "react-icons/fa6";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaArrowRight, FaQuoteLeft, FaStar } from "react-icons/fa6"; // Ensure FaStar is available
 import "./StudentTestimonials.css";
 
 export default function StudentTestimonials() {
@@ -132,90 +132,83 @@ export default function StudentTestimonials() {
   }, []);
 
   return (
-    <section className="student-testimonials">
-      <Container fluid="lg">
-        <Row className="align-items-center">
-          {/* Left side */}
-          <Col lg={4} className="left-panel">
-            <motion.h2
-              className="section-title"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              What Our <br /> Students Says
-            </motion.h2>
+    <section className="student-testimonials-premium">
+      <Container>
+        <div className="premium-header text-center mb-5">
+          <motion.h2
+            className="premium-title"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Stories of <span className="text-highlight">Transformation</span>
+          </motion.h2>
+          <motion.p
+            className="premium-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true }}
+          >
+            Real students, real results. Discover how we've helped thousands find their voice.
+          </motion.p>
+        </div>
 
-            <motion.p
-              className="section-desc"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              Our students speak from the heart—sharing their growth,
-              breakthroughs, and what it truly means to find your voice.
-            </motion.p>
-
-            <motion.button
-              className="experience-btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span>Tell About your Experience</span>
-              <FaArrowRight />
-            </motion.button>
-          </Col>
-
-          {/* Right side */}
-          <Col lg={8} className="right-panel">
-            <motion.div
-              className="device-frame"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-            >
-              <div className="frame-top-bar" />
-
-              <div
-                className="testimonial-slider"
-                onTouchStart={onTouchStart}
-                onTouchMove={onTouchMove}
-                onTouchEnd={onTouchEnd}
-                onMouseDown={(e) => onTouchStart(e)}
-                onMouseMove={(e) => {
-                  if (!isPhone) onTouchMove(e);
-                }}
-                onMouseUp={() => {
-                  if (!isPhone) onTouchEnd();
-                }}
-                onMouseLeave={() => {
-                  if (isDragging.current && !isPhone) onTouchEnd();
-                }}
+        <div
+          className="premium-slider-wrapper"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onMouseDown={(e) => onTouchStart(e)}
+          onMouseMove={(e) => { if (!isPhone) onTouchMove(e); }}
+          onMouseUp={() => { if (!isPhone) onTouchEnd(); }}
+          onMouseLeave={() => { if (isDragging.current && !isPhone) onTouchEnd(); }}
+        >
+          <div className="premium-track" ref={sliderRef}>
+            {testimonials.map((t, i) => (
+              <motion.div
+                className="premium-card"
+                key={i}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
               >
-                <div className="slider-viewport">
-                  <div className="slider-track" ref={sliderRef}>
-                    {testimonials.map((t, i) => (
-                      <div className="testimonial-card" key={i}>
-                        <img
-                          src={t.img}
-                          alt={t.name}
-                          className="student-img"
-                          loading="lazy"
-                        />
-                        <p className="feedback">"{t.feedback}"</p>
-                        <h5>{t.name}</h5>
-                        <span>{t.company}</span>
-                      </div>
-                    ))}
+                <div className="card-top-accent"></div>
+                <div className="quote-icon-wrap">
+                  <FaQuoteLeft />
+                </div>
+
+                <p className="premium-feedback">"{t.feedback}"</p>
+
+                <div className="premium-rating">
+                  {[...Array(5)].map((_, starsIndex) => (
+                    <FaStar key={starsIndex} className="star-icon" />
+                  ))}
+                </div>
+
+                <div className="premium-user-info">
+                  <div className="user-avatar">
+                    <img src={t.img} alt={t.name} loading="lazy" />
+                  </div>
+                  <div className="user-details">
+                    <h5>{t.name}</h5>
+                    <span className="user-company">{t.company}</span>
                   </div>
                 </div>
-              </div>
-            </motion.div>
-          </Col>
-        </Row>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <div className="premium-actions text-center mt-5">
+          <motion.button
+            className="premium-cta-btn"
+            whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(79, 70, 229, 0.3)" }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span>Join Our Community</span>
+            <FaArrowRight />
+          </motion.button>
+        </div>
       </Container>
     </section>
   );

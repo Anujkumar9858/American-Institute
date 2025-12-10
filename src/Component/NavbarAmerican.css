@@ -6,19 +6,25 @@
 */
 
 /* ---------- Reset / Base ---------- */
-* { box-sizing: border-box; }
-html, body {
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+  font-family: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 /* ---------- Navbar base ---------- */
 .animated-navbar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 1400;
   transition: background-color 200ms ease, box-shadow 200ms ease, padding 200ms ease, left 200ms ease, right 200ms ease;
@@ -26,29 +32,66 @@ html, body {
   background: transparent;
   box-shadow: none;
 }
-.animated-navbar.top { background: transparent !important; box-shadow: none !important; }
+
+.animated-navbar.top {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 .animated-navbar.scrolled {
-  left: 8px; right: 8px; top: 8px; width: auto;
-  border-radius: 10px; padding: 6px 10px;
-  background: rgba(255,255,255,0.98);
-  box-shadow: 0 10px 30px rgba(12,18,30,0.08);
+  left: 8px;
+  right: 8px;
+  top: 8px;
+  width: auto;
+  border-radius: 12px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(12, 18, 30, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.4);
 }
 
 /* ---------- Full-width custom container (logo left, links right) ---------- */
 .nav-full {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* logo left, everything else right */
+  justify-content: space-between;
+  /* logo left, everything else right */
   width: 100%;
   padding: 0 20px;
 }
 
 /* brand */
-.brand-wrap { display: flex; align-items: center; }
-.brand-text { font-weight: 800; font-size: 20px; color: #111; text-decoration: none; display: flex; align-items: center; }
-.brand-logo { height: 40px; width: auto; transition: transform .16s ease, height .16s ease; }
-.animated-navbar.top .brand-logo { transform: translateY(-6px); }
-.animated-navbar.scrolled .brand-logo { height: 30px; transform: translateY(0); }
+.brand-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  font-weight: 700;
+  font-size: 22px;
+  color: #111;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.02em;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+  transition: transform .16s ease, height .16s ease;
+}
+
+.animated-navbar.top .brand-logo {
+  transform: translateY(-6px);
+}
+
+.animated-navbar.scrolled .brand-logo {
+  height: 30px;
+  transform: translateY(0);
+}
 
 /* right side wrapper so toggle + collapse align right nicely */
 .right-controls {
@@ -58,31 +101,39 @@ html, body {
 }
 
 /* ---------- Desktop inline links ---------- */
-.nav-links { 
-  display: flex; 
-  gap: 32px;   /* ✅ equal gap desktop pe */
-  align-items: center; 
+.nav-links {
+  display: flex;
+  gap: 32px;
+  /* ✅ equal gap desktop pe */
+  align-items: center;
 }
+
 .nav-links .nav-link-item,
 .nav-links .nav-link-item:link,
 .nav-links .nav-link-item:visited {
-  font-weight: 700;
-  font-size: 16px;  /* ✅ equal font-size */
+  font-weight: 500;
+  font-size: 16px;
+  /* ✅ equal font-size */
   color: #111;
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 99px;
+  /* Pill shape for desktop links */
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: color 180ms ease, transform 220ms ease; /* ✅ smooth animation */
+  transition: background-color 0.3s ease, color 0.3s ease;
   background: transparent;
   border: none;
   cursor: pointer;
+  letter-spacing: -0.01em;
 }
+
 .nav-links .nav-link-item:hover {
-  color: #6d4ddf;
-  transform: translateY(-2px) scale(1.05); /* ✅ animated hover effect */
+  background: rgba(0, 0, 0, 0.04);
+  color: #111;
+  transform: none;
+  /* Removed jumpy transform in favor of subtle bg change */
 }
 
 /* user-link default styling (desktop) */
@@ -96,24 +147,58 @@ html, body {
 }
 
 /* toggle */
-.nav-toggle { border: none; background: transparent; padding: 6px; color: #111; cursor: pointer; }
+.nav-toggle {
+  border: none;
+  background: transparent;
+  padding: 6px;
+  color: #111;
+  cursor: pointer;
+}
 
 /* ---------- Desktop layout >=992px ---------- */
 @media (min-width: 992px) {
-  .nav-full { padding: 0 28px; }
-  .nav-links { gap: 32px; }   /* ✅ maintain gap */
-  .nav-links .nav-link-item { font-size: 16px; padding: 10px 14px; }
-  .nav-toggle { display: none !important; }
+  .nav-full {
+    padding: 0 28px;
+  }
+
+  .nav-links {
+    gap: 32px;
+  }
+
+  /* ✅ maintain gap */
+  .nav-links .nav-link-item {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+
+  .nav-toggle {
+    display: none !important;
+  }
 }
 
 /* ---------- MOBILE: centered pill menu <=991px ---------- */
 @media (max-width: 991px) {
-  /* hide inline links (we show inside collapse) */
-  .nav-links { display: none; }
 
-  .navbar-collapse { transition: none; }
-  .navbar-collapse.collapse { display: none; height: 0; overflow: hidden; }
-  .navbar-collapse.collapsing { display: block !important; height: auto !important; overflow: hidden; }
+  /* hide inline links (we show inside collapse) */
+  .nav-links {
+    display: none;
+  }
+
+  .navbar-collapse {
+    transition: none;
+  }
+
+  .navbar-collapse.collapse {
+    display: none;
+    height: 0;
+    overflow: hidden;
+  }
+
+  .navbar-collapse.collapsing {
+    display: block !important;
+    height: auto !important;
+    overflow: hidden;
+  }
 
   /* centered pill under navbar */
   .navbar-collapse.collapse.show {
@@ -125,10 +210,13 @@ html, body {
     transform: translateX(-50%);
     width: calc(100% - 48px);
     max-width: 900px;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
     padding: 8px 12px;
     border-radius: 999px;
-    box-shadow: 0 14px 40px rgba(12,18,30,0.12);
+    box-shadow: 0 14px 40px rgba(12, 18, 30, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     box-sizing: border-box;
     z-index: 1499;
     overflow: visible;
@@ -139,7 +227,8 @@ html, body {
   .navbar-collapse.collapse.show .nav-links {
     display: flex !important;
     flex-direction: row;
-    gap: 20px;   /* ✅ equal gap mobile pe */
+    gap: 20px;
+    /* ✅ equal gap mobile pe */
     align-items: center;
     justify-content: center;
     overflow-x: auto;
@@ -153,18 +242,22 @@ html, body {
     display: inline-flex !important;
     flex: 0 0 auto;
     white-space: nowrap;
-    padding: 8px 14px !important;
-    font-size: 16px !important; /* ✅ equal font-size mobile me bhi */
+    padding: 8px 16px !important;
+    font-size: 15px !important;
+    /* ✅ slightly smaller/cleaner */
     margin: 0 !important;
-    border-radius: 0 !important;
+    border-radius: 99px !important;
     background: transparent !important;
     color: #111 !important;
     box-shadow: none !important;
-    transition: color 180ms ease, transform 220ms ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
+
   .navbar-collapse.collapse.show .nav-link-item:hover {
-    color: #6d4ddf !important;
-    transform: translateY(-2px) scale(1.05); /* ✅ hover animation mobile pe bhi */
+    color: #000 !important;
+    background: rgba(0, 0, 0, 0.05) !important;
+    transform: none;
+    /* Cleaner hover */
   }
 
   /* --- Make sure the user icon is visible in the pill too --- */
@@ -180,27 +273,63 @@ html, body {
   }
 
   /* keep navbar transparent at top even when menu open */
-  .animated-navbar.top { background: transparent !important; box-shadow: none !important; }
-  .animated-navbar.top .nav-toggle { color: #fff !important; }
-  .animated-navbar.scrolled .nav-toggle { color: #111 !important; }
+  .animated-navbar.top {
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .animated-navbar.top .nav-toggle {
+    color: #fff !important;
+  }
+
+  .animated-navbar.scrolled .nav-toggle {
+    color: #111 !important;
+  }
 
   /* small tweaks */
-  .brand-text { font-size: 18px; }
-  .brand-logo { height: 34px; }
-  .nav-toggle { padding: 8px; font-size: 20px; }
+  .brand-text {
+    font-size: 18px;
+  }
+
+  .brand-logo {
+    height: 34px;
+  }
+
+  .nav-toggle {
+    padding: 8px;
+    font-size: 20px;
+  }
 
   /* smallest phones */
   @media (max-width: 576px) {
-    .navbar-collapse.collapse.show { top: 60px; width: calc(100% - 32px); }
-    .navbar-collapse.collapse.show .nav-link-item { padding: 8px 12px !important; font-size: 16px !important; }
-    .navbar-collapse.collapse.show .user-link { padding: 6px 8px !important; }
-    .brand-logo { height: 30px; }
+    .navbar-collapse.collapse.show {
+      top: 60px;
+      width: calc(100% - 32px);
+    }
+
+    .navbar-collapse.collapse.show .nav-link-item {
+      padding: 8px 12px !important;
+      font-size: 16px !important;
+    }
+
+    .navbar-collapse.collapse.show .user-link {
+      padding: 6px 8px !important;
+    }
+
+    .brand-logo {
+      height: 30px;
+    }
   }
 }
 
 /* ---------- Top-state contrast (desktop only) ---------- */
-.animated-navbar.top .nav-links .nav-link-item { color: #fff !important; }
-.animated-navbar.top .user-link { color: #fff !important; }
+.animated-navbar.top .nav-links .nav-link-item {
+  color: #fff !important;
+}
+
+.animated-navbar.top .user-link {
+  color: #fff !important;
+}
 
 /* ---------- Ensure pill links visible when menu open (safety) ---------- */
 .animated-navbar.top .navbar-collapse.collapse.show .nav-link-item,
@@ -209,4 +338,7 @@ html, body {
 }
 
 /* ---------- Accessibility ---------- */
-.nav-link-item:focus { outline: 2px solid rgba(109,77,223,0.14); outline-offset: 2px; }
+.nav-link-item:focus {
+  outline: 2px solid rgba(109, 77, 223, 0.14);
+  outline-offset: 2px;
+}

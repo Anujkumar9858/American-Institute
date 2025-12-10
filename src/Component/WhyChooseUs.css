@@ -1,118 +1,184 @@
+/* WhyChooseUs.css - Premium Polished Design */
+
 .choose-section {
-  padding: 80px 0;
-  background: #fff;
+  padding: 100px 0;
+  background: linear-gradient(180deg, #f9fafb 0%, #f3f4f6 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background decoration (optional subtle glow) */
+.choose-section::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.03) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 .choose-title {
-  font-size: 40px;
+  font-family: "Outfit", sans-serif;
   font-weight: 700;
+  font-size: 42px;
+  color: #111;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
 }
 
 .choose-subtitle {
-  font-size: 16px;
-  font-style: italic;
+  font-family: "Outfit", sans-serif;
+  font-size: 18px;
   color: #555;
-  margin-top: 10px;
-}
-
-/* --- Typed subtitle effect --- */
-.typed-subtitle {
-  font-size: 16px;
-  font-style: italic;
-  color: #555;
-  margin-top: 10px;
-  min-height: 22px; /* space reserve so layout stable */
+  font-weight: 400;
+  min-height: 27px;
 }
 
 .typed-cursor {
   display: inline-block;
   width: 2px;
-  height: 1.1em;
+  height: 1.2em;
   margin-left: 4px;
-  background: #444;
+  background: #6d4ddf;
   animation: blink 1s steps(2, start) infinite;
   vertical-align: bottom;
 }
 
 @keyframes blink {
-  0%, 60% { opacity: 1; }
-  61%, 100% { opacity: 0; }
+
+  0%,
+  60% {
+    opacity: 1;
+  }
+
+  61%,
+  100% {
+    opacity: 0;
+  }
 }
 
-/* --- Card styles --- */
+/* --- Card Styles --- */
 .choose-card {
-  border-radius: 20px;
+  background: #fff;
+  border-radius: 24px;
   overflow: hidden;
-  min-height: 420px;          /* taller */
-  max-width: 360px;           /* wider */
-  width: 100%;
-  margin: 0 auto;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.03);
 }
 
 .choose-card:hover {
-  box-shadow: 0 16px 32px rgba(0,0,0,0.25);
-  transform: translateY(-6px);
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.12);
 }
 
-/* top part */
-.card-top {
-  color: #fff;
-  padding: 24px;
-  flex: 1;
+/* Image Wrapper */
+.card-image-wrap {
   position: relative;
+  height: 240px;
+  overflow: hidden;
 }
 
-.card-top h4 {
-  font-weight: 700;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
-.card-top p {
-  font-size: 15px;
-  line-height: 1.5;
-  margin: 0;
-}
-
-.arrow-icon {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 18px;
-}
-
-/* bottom image - simple rectangle */
-.card-bottom img {
+.card-image-wrap img {
   width: 100%;
-  height: 250px;
+  height: 100%;
   object-fit: cover;
-  display: block;
-
-  /* sirf bottom rounded */
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  transition: transform 0.6s ease;
 }
 
-/* responsive */
-@media (max-width: 991px) {
-  .choose-card {
-    max-width: 90%;
-    min-height: 400px;
-  }
+.choose-card:hover .card-image-wrap img {
+  transform: scale(1.08);
+  /* Subtle zoom on hover */
 }
 
-@media (max-width: 576px) {
-  .choose-card {
-    max-width: 100%;
-    min-height: 380px;
+/* Gradient Overlay on Image */
+.card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  /* Overlay styling handled inline for dynamic colors, 
+     but we add a base transition here if needed */
+}
+
+/* Content */
+.card-content {
+  padding: 28px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+}
+
+/* Icon Box floating over content/image boundary */
+.card-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-bottom: 20px;
+  transition: transform 0.3s ease;
+}
+
+.choose-card:hover .card-icon-box {
+  transform: rotate(-15deg) scale(1.1);
+}
+
+/* Typography */
+.card-title {
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  color: #1f2937;
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+
+.card-desc {
+  font-family: "Outfit", sans-serif;
+  font-size: 15px;
+  color: #6b7280;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+/* Decorative Footer Line */
+.card-footer-line {
+  height: 4px;
+  width: 40px;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.choose-card:hover .card-footer-line {
+  width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .choose-section {
+    padding: 60px 0;
   }
 
-  .card-bottom img {
-    height: 220px;
+  .choose-title {
+    font-size: 32px;
+  }
+
+  .choose-card {
+    margin-bottom: 20px;
   }
 }
