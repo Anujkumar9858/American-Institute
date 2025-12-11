@@ -110,12 +110,19 @@ export default function StudentTestimonials() {
   }
 
   function cardWidth() {
-    const el = sliderRef.current?.querySelector(".testimonial-card");
+    if (!sliderRef.current) return 300;
+    const el = sliderRef.current.querySelector(".premium-card");
     if (el) {
+      // Get gap from parent
+      const parentStyle = getComputedStyle(sliderRef.current);
+      const gap = parseFloat(parentStyle.gap || 0);
+
       const style = getComputedStyle(el);
-      return el.offsetWidth + parseFloat(style.marginLeft || 0) + parseFloat(style.marginRight || 0);
+      const width = el.offsetWidth + parseFloat(style.marginLeft || 0) + parseFloat(style.marginRight || 0);
+
+      return width + gap; // Include gap in the total width to slide
     }
-    return 280;
+    return 300;
   }
 
   useEffect(() => {
