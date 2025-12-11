@@ -83,6 +83,7 @@ export default function RegisterCard() {
               </small>
             </div>
           </div>
+          <div></div>
         </div>
       </motion.div>
     </div>
