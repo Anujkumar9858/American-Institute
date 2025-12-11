@@ -18,8 +18,8 @@ import FooterBottom from "./Component/FooterBottom";
 import ChatWidget from "./Component/ChatWidget";
 
 // Pages
-import LoginPage from "./Component/LoginPage.jsx";      
-import RegisterPage from "./Component/RegisterCard.jsx"; 
+import LoginPage from "./Component/LoginPage.jsx";
+import RegisterPage from "./Component/RegisterCard.jsx";
 import MentorDetail from "./Component/MentorDetail";
 import ContactPage from "./Component/ContactPage";
 import DemoGallery from "./Component/DemoGallery";
@@ -28,14 +28,14 @@ import AboutInstitute from "./Component/AboutInstitute";
 
 // ✅ Enrollment & Payment
 import CourseEnroll from "./Payment/CourseEnroll.jsx";
-import PaymentPage from "./Payment/PaymentPage.jsx"; 
+import PaymentPage from "./Payment/PaymentPage.jsx";
 
 // Protected route
-import ProtectedRoute from "./Component/ProtectedRoute"; 
+import ProtectedRoute from "./Component/ProtectedRoute";
 
 // Global Styles
-import "bootstrap/dist/css/bootstrap.min.css";
-import "leaflet/dist/leaflet.css";
+
+
 
 function App() {
   return (
